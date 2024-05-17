@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd" colors="true" cacheDirectory=".phpunit.cache" bootstrap="test/bootstrap.php">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>./test/Unit</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>./test/Integration</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="PACT_MOCK_SERVER_HOST" value="localhost"/>
+        <env name="PACT_MOCK_SERVER_PORT" value="7201"/>
+        <env name="PACT_CONSUMER_NAME" value="gubeeConsumer"/>
+        <env name="PACT_CONSUMER_VERSION" value="1.0.0"/>
+        <env name="PACT_CONSUMER_TAG" value="master"/>
+        <env name="PACT_PROVIDER_NAME" value="gubeeProvider"/>
+        <env name="PACT_OUTPUT_DIR" value="./var/test/consumer"/>
+    </php>
+</phpunit>
