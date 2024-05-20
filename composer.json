@@ -1,5 +1,5 @@
 {
-    "name": "gubee/php-sdk",
+    "name": "gubee-marketplace/php-sdk",
     "description": "Gubee SDK for PHP",
     "type": "library",
     "authors": [
