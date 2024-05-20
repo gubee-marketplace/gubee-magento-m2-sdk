@@ -1,11 +1,15 @@
 {
-    "name": "gubee/sdk",
+    "name": "gubee/php-sdk",
     "description": "Gubee SDK for PHP",
     "type": "library",
     "authors": [
         {
             "name": "Marcos 'Marcão' Aurelio",
             "email": "macosaures+git@gmail.com"
+        },
+        {
+            "name": "Matheus Heiden",
+            "email": "matheus.heiden@bis2bis.com.br"
         },
         {
             "name": "Gubee",
