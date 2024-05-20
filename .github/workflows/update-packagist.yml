@@ -1,0 +1,21 @@
+name: Update Packagist
+
+on:
+  push:
+    branches:
+      - main
+      - master # Dependendo do nome da sua branch principal
+
+jobs:
+  update-packagist:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Notify Packagist
+      run: |
+        curl -X POST "https://packagist.org/api/update-package?username=renatojavagarcia&apiToken=${{ secrets.PACKAGIST_TOKEN }}" \
+        -H "Content-Type: application/json" \
+        -d '{"repository":{"url":"https://github.com/gubee-marketplace/gubee-magento-m2-sdk"}}'
