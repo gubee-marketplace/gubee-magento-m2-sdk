@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^7.3|^7.4|^8.0|^8.1",
-        "php-di/php-di": "^6.4",
+        "php-di/php-di": "^6.3",
         "php-http/client-common": "^2.7",
         "php-http/discovery": "*",
         "php-http/multipart-stream-builder": "^1.3",
