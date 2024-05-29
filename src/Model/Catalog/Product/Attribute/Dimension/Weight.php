@@ -36,7 +36,7 @@ class Weight extends AbstractModel
         return $this->type;
     }
 
-    public function setType(TypeEnum $type): self
+    public function setType(TypeEnum $type)
     {
         $this->type = $type;
         return $this;
@@ -51,7 +51,7 @@ class Weight extends AbstractModel
         return $this->value;
     }
 
-    public function setValue(float $value): self
+    public function setValue(float $value)
     {
         $this->value = $value;
         return $this;

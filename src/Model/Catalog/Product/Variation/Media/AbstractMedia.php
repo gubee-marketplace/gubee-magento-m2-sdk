@@ -39,7 +39,7 @@ abstract class AbstractMedia extends AbstractModel
         return $this->main;
     }
 
-    public function setMain(bool $main): self
+    public function setMain(bool $main)
     {
         $this->main = $main;
         return $this;
@@ -50,7 +50,7 @@ abstract class AbstractMedia extends AbstractModel
         return $this->order;
     }
 
-    public function setOrder(int $order): self
+    public function setOrder(int $order)
     {
         $this->order = $order;
         return $this;
@@ -61,7 +61,7 @@ abstract class AbstractMedia extends AbstractModel
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(string $id)
     {
         $this->id = $id;
         return $this;
@@ -72,7 +72,7 @@ abstract class AbstractMedia extends AbstractModel
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name)
     {
         $this->name = $name;
         return $this;
@@ -83,7 +83,7 @@ abstract class AbstractMedia extends AbstractModel
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url)
     {
         $this->url = $url;
         return $this;

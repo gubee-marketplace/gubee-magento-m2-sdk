@@ -14,7 +14,7 @@ use function sprintf;
 
 abstract class AbstractEnum implements Stringable, JsonSerializable
 {
-    protected string $value;
+    protected $value;
 
     public function __construct(string $value)
     {
@@ -50,7 +50,7 @@ abstract class AbstractEnum implements Stringable, JsonSerializable
      *
      * @param mixed $value
      */
-    abstract public static function fromValue($value): self;
+    abstract public static function fromValue($value);
 
     /**
      * @return string

@@ -54,7 +54,7 @@ class ErrorException extends \ErrorException implements ExceptionInterface
      *
      * @param RequestInterface $request Request that caused the exception.
      */
-    public function setRequest($request): self
+    public function setRequest($request)
     {
         $this->request = $request;
         return $this;
@@ -75,7 +75,7 @@ class ErrorException extends \ErrorException implements ExceptionInterface
      *
      * @param ResponseInterface $response Response that caused the exception.
      */
-    public function setResponse($response): self
+    public function setResponse($response)
     {
         $this->response = $response;
         return $this;

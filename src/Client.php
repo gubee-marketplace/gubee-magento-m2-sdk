@@ -28,10 +28,10 @@ class Client {
     public const VERSION = '1.0.0';
     public const BASE_URI = 'https://api.gubee.com.br';
 
-    protected ServiceProviderInterface $serviceProvider;
-    protected LoggerInterface $logger;
-    protected Builder $httpClientBuilder;
-    protected History $responseHistory;
+    protected $serviceProvider;
+    protected $logger;
+    protected $httpClientBuilder;
+    protected $responseHistory;
 
     public function __construct(
         ?ServiceProviderInterface $serviceProvider = null,
@@ -49,7 +49,7 @@ class Client {
         $this->httpClientBuilder->addPlugin(
             new RetryPlugin([
                 'retries' => $retryCount,
-                'exception_decider' => fn(RequestInterface $request, \Throwable $exception) => $this->shouldRetry($request, $exception),
+                'exception_decider' => function ($request, $exception) { $this->shouldRetry($request, $exception); },
             ])
         );
 
@@ -97,7 +97,7 @@ class Client {
         return new Resource\TokenResource($this);
     }
 
-    public function authenticate(string $token): self {
+    public function authenticate(string $token) {
         $this->httpClientBuilder->removePlugin(
             Authenticate::class
         )->addPlugin(
@@ -116,7 +116,7 @@ class Client {
     /**
      * Set the base URL for the client.
      */
-    public function setUrl(string $url): self {
+    public function setUrl(string $url) {
         $uri = $this->httpClientBuilder->getUriFactory()
             ->createUri($url);
 

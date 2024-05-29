@@ -11,12 +11,12 @@ class StatusEnum extends AbstractEnum
     private const ACTIVE   = 'ACTIVE';
     private const INACTIVE = 'INACTIVE';
 
-    public static function ACTIVE(): self
+    public static function ACTIVE()
     {
         return new self(self::ACTIVE);
     }
 
-    public static function INACTIVE(): self
+    public static function INACTIVE()
     {
         return new self(self::INACTIVE);
     }
@@ -26,7 +26,7 @@ class StatusEnum extends AbstractEnum
      *
      * @param mixed $value
      */
-    public static function fromValue($value): self
+    public static function fromValue($value)
     {
         return new self($value);
     }

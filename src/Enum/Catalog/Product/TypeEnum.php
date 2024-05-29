@@ -11,22 +11,22 @@ class TypeEnum extends StatusEnum
     private const VARIANT = 'VARIANT';
     private const VIRTUAL = 'VIRTUAL';
 
-    public static function KIT(): self
+    public static function KIT()
     {
         return new self(self::KIT);
     }
 
-    public static function SIMPLE(): self
+    public static function SIMPLE()
     {
         return new self(self::SIMPLE);
     }
 
-    public static function VARIANT(): self
+    public static function VARIANT()
     {
         return new self(self::VARIANT);
     }
 
-    public static function VIRTUAL(): self
+    public static function VIRTUAL()
     {
         return new self(self::VIRTUAL);
     }
@@ -36,7 +36,7 @@ class TypeEnum extends StatusEnum
      *
      * @param mixed $value
      */
-    public static function fromValue($value): self
+    public static function fromValue($value)
     {
         return new self($value);
     }

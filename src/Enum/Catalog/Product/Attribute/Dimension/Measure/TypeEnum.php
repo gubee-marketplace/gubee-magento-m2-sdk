@@ -12,17 +12,17 @@ class TypeEnum extends AbstractEnum
     private const METER      = 'METER';
     private const MILLIMETER = 'MILLIMETER';
 
-    public static function CENTIMETER(): self
+    public static function CENTIMETER()
     {
         return new self(self::CENTIMETER);
     }
 
-    public static function METER(): self
+    public static function METER()
     {
         return new self(self::METER);
     }
 
-    public static function MILLIMETER(): self
+    public static function MILLIMETER()
     {
         return new self(self::MILLIMETER);
     }
@@ -32,7 +32,7 @@ class TypeEnum extends AbstractEnum
      *
      * @param mixed $value
      */
-    public static function fromValue($value): self
+    public static function fromValue($value)
     {
         return new self($value);
     }

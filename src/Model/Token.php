@@ -9,13 +9,13 @@ use DateTimeInterface;
 
 class Token extends AbstractModel
 {
-    protected string $id;
-    protected string $login;
-    protected bool $revoked;
-    protected string $sellerId;
-    protected string $token;
-    protected string $tokenType;
-    protected DateTimeInterface $validity;
+    protected $id;
+    protected $login;
+    protected $revoked;
+    protected $sellerId;
+    protected $token;
+    protected $tokenType;
+    protected $validity;
 
     /**
      * Summary of __construct
@@ -50,7 +50,7 @@ class Token extends AbstractModel
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(string $id)
     {
         $this->id = $id;
         return $this;
@@ -61,7 +61,7 @@ class Token extends AbstractModel
         return $this->login;
     }
 
-    public function setLogin(string $login): self
+    public function setLogin(string $login)
     {
         $this->login = $login;
         return $this;
@@ -72,7 +72,7 @@ class Token extends AbstractModel
         return $this->revoked;
     }
 
-    public function setRevoked(bool $revoked): self
+    public function setRevoked(bool $revoked)
     {
         $this->revoked = $revoked;
         return $this;
@@ -83,7 +83,7 @@ class Token extends AbstractModel
         return $this->sellerId;
     }
 
-    public function setSellerId(string $sellerId): self
+    public function setSellerId(string $sellerId)
     {
         $this->sellerId = $sellerId;
         return $this;
@@ -94,7 +94,7 @@ class Token extends AbstractModel
         return $this->token;
     }
 
-    public function setToken(string $token): self
+    public function setToken(string $token)
     {
         $this->token = $token;
         return $this;
@@ -105,7 +105,7 @@ class Token extends AbstractModel
         return $this->tokenType;
     }
 
-    public function setTokenType(string $tokenType): self
+    public function setTokenType(string $tokenType)
     {
         $this->tokenType = $tokenType;
         return $this;
@@ -122,7 +122,7 @@ class Token extends AbstractModel
      * @param string|DateTimeInterface $validity
      * @return Token
      */
-    public function setValidity($validity): self
+    public function setValidity($validity)
     {
         if (! $validity instanceof DateTimeInterface) {
             $validity = DateTime::createFromFormat(

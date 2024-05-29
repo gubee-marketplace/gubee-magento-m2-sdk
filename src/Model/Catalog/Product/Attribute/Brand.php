@@ -73,7 +73,7 @@ class Brand extends AbstractModel
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name)
     {
         $this->name = $name;
         return $this;
@@ -84,7 +84,7 @@ class Brand extends AbstractModel
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description)
     {
         $this->description = $description;
         return $this;
@@ -95,7 +95,7 @@ class Brand extends AbstractModel
         return $this->hubeeId;
     }
 
-    public function setHubeeId(?string $hubeeId): self
+    public function setHubeeId(?string $hubeeId)
     {
         $this->hubeeId = $hubeeId;
         return $this;
@@ -106,7 +106,7 @@ class Brand extends AbstractModel
         return $this->id;
     }
 
-    public function setId(?string $id): self
+    public function setId(?string $id)
     {
         $this->id = $id;
         return $this;

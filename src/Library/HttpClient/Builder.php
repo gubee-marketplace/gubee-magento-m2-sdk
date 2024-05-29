@@ -17,13 +17,13 @@ use Psr\Http\Message\UriFactoryInterface;
 
 class Builder
 {
-    protected ClientInterface $client;
-    protected UriFactoryInterface $uriFactory;
-    protected StreamFactoryInterface $streamFactory;
-    protected RequestFactoryInterface $requestFactory;
+    protected $client;
+    protected $uriFactory;
+    protected $streamFactory;
+    protected $requestFactory;
 
     /** @var array<Plugin> */
-    protected array $plugins = [];
+    protected $plugins = [];
 
     public function __construct(
         ?ClientInterface $client = null,
@@ -37,13 +37,13 @@ class Builder
         $this->requestFactory = $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory();
     }
 
-    public function addPlugin(Plugin $plugin): self
+    public function addPlugin(Plugin $plugin)
     {
         $this->plugins[] = $plugin;
         return $this;
     }
 
-    public function removePlugin(string $fqcn): self
+    public function removePlugin(string $fqcn)
     {
         foreach ($this->plugins as $key => $plugin) {
             if ($plugin instanceof $fqcn) {

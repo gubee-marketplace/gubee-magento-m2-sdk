@@ -13,15 +13,15 @@ use function is_int;
 
 class Category extends AbstractModel
 {
-    protected string $id;
-    protected string $name;
-    protected ?bool $active                 = null;
-    protected ?string $description          = null;
-    protected ?bool $enabledAutoIntegration = null;
-    protected ?string $hubeeId              = null;
-    protected ?Category $parent             = null;
-    protected CategoryResource $categoryResource;
-    protected ServiceProviderInterface $serviceProvider;
+    protected $id;
+    protected $name;
+    protected $active                 = null;
+    protected $description          = null;
+    protected $enabledAutoIntegration = null;
+    protected $hubeeId              = null;
+    protected $parent             = null;
+    protected $categoryResource;
+    protected $serviceProvider;
 
     /**
      * @var int|Category $parent
@@ -80,7 +80,7 @@ class Category extends AbstractModel
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(string $id)
     {
         $this->id = $id;
         return $this;
@@ -91,7 +91,7 @@ class Category extends AbstractModel
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name)
     {
         $this->name = $name;
         return $this;
@@ -102,7 +102,7 @@ class Category extends AbstractModel
         return $this->active;
     }
 
-    public function setActive(bool $active): self
+    public function setActive(bool $active)
     {
         $this->active = $active;
         return $this;
@@ -113,7 +113,7 @@ class Category extends AbstractModel
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description)
     {
         $this->description = $description;
         return $this;
@@ -124,7 +124,7 @@ class Category extends AbstractModel
         return $this->enabledAutoIntegration;
     }
 
-    public function setEnabledAutoIntegration(bool $enabledAutoIntegration): self
+    public function setEnabledAutoIntegration(bool $enabledAutoIntegration)
     {
         $this->enabledAutoIntegration = $enabledAutoIntegration;
         return $this;
@@ -135,7 +135,7 @@ class Category extends AbstractModel
         return $this->hubeeId;
     }
 
-    public function setHubeeId(string $hubeeId): self
+    public function setHubeeId(string $hubeeId)
     {
         $this->hubeeId = $hubeeId;
         return $this;
@@ -146,7 +146,7 @@ class Category extends AbstractModel
         return $this->parent;
     }
 
-    public function setParent($parent): self
+    public function setParent($parent)
     {
         if (is_int($parent)) {
             $parent = $this->serviceProvider->create(

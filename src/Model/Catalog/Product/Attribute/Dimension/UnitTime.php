@@ -33,7 +33,7 @@ class UnitTime extends AbstractModel
         return $this->type;
     }
 
-    public function setType(TypeEnum $type): self
+    public function setType(TypeEnum $type)
     {
         $this->type = $type;
         return $this;
@@ -44,7 +44,7 @@ class UnitTime extends AbstractModel
         return $this->value;
     }
 
-    public function setValue(int $value): self
+    public function setValue(int $value)
     {
         $this->value = $value;
         return $this;

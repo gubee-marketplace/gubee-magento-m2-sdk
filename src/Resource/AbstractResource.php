@@ -38,7 +38,7 @@ abstract class AbstractResource
 {
     public const URI_PREFIX = '/api/';
 
-    protected Client $client;
+    protected $client;
 
     public function __construct(Client $client)
     {

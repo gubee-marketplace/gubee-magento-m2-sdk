@@ -44,7 +44,7 @@ class ValidityPeriod extends AbstractModel
         return $this->beginDt;
     }
 
-    public function setBeginDt(DateTimeInterface $beginDt): self
+    public function setBeginDt(DateTimeInterface $beginDt)
     {
         $this->beginDt = $beginDt;
         return $this;
@@ -55,7 +55,7 @@ class ValidityPeriod extends AbstractModel
         return $this->endDt;
     }
 
-    public function setEndDt(DateTimeInterface $endDt): self
+    public function setEndDt(DateTimeInterface $endDt)
     {
         $this->endDt = $endDt;
         return $this;

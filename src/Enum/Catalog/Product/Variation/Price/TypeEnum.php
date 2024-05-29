@@ -11,12 +11,12 @@ class TypeEnum extends AbstractEnum
     private const DEFAULT   = 'DEFAULT';
     private const PROMOTION = 'PROMOTION';
 
-    public static function DEFAULT(): self
+    public static function DEFAULT()
     {
         return new self(self::DEFAULT);
     }
 
-    public static function PROMOTION(): self
+    public static function PROMOTION()
     {
         return new self(self::PROMOTION);
     }
@@ -26,7 +26,7 @@ class TypeEnum extends AbstractEnum
      *
      * @param mixed $value
      */
-    public static function fromValue($value): self
+    public static function fromValue($value)
     {
         return new self($value);
     }

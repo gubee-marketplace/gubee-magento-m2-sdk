@@ -23,19 +23,19 @@ class ResultPager {
     /**
      * The client to use for pagination.
      */
-    private Client $client;
+    private $client;
 
     /**
      * The number of entries to request per page.
      */
-    private int $perPage;
+    private $perPage;
 
     /**
      * The pagination result from the API.
      *
      * @var array<string,string>
      */
-    private array $pagination;
+    private $pagination;
 
     /**
      * Create a new result pager instance.

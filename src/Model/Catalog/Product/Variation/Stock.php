@@ -43,7 +43,7 @@ class Stock extends AbstractModel {
         }
     }
 
-    public function save(string $productId, string $skuId): self {
+    public function save(string $productId, string $skuId) {
         $this->stockResource->updateStock(
             $productId,
             $skuId,
@@ -57,7 +57,7 @@ class Stock extends AbstractModel {
         return $this->crossDockingTime;
     }
 
-    public function setCrossDockingTime(UnitTime $crossDockingTime): self {
+    public function setCrossDockingTime(UnitTime $crossDockingTime) {
         $this->crossDockingTime = $crossDockingTime;
         return $this;
     }
@@ -66,7 +66,7 @@ class Stock extends AbstractModel {
         return $this->priority;
     }
 
-    public function setPriority(int $priority): self {
+    public function setPriority(int $priority) {
         $this->priority = $priority;
         return $this;
     }
@@ -75,7 +75,7 @@ class Stock extends AbstractModel {
         return $this->qty;
     }
 
-    public function setQty(int $qty): self {
+    public function setQty(int $qty) {
         $this->qty = $qty;
         return $this;
     }
@@ -84,7 +84,7 @@ class Stock extends AbstractModel {
         return $this->warehouseId;
     }
 
-    public function setWarehouseId(string $warehouseId): self {
+    public function setWarehouseId(string $warehouseId) {
         $this->warehouseId = $warehouseId;
         return $this;
     }

@@ -28,7 +28,7 @@ class AttributeValue extends AbstractModel
         return $this->attribute;
     }
 
-    public function setAttribute(string $attribute): self
+    public function setAttribute(string $attribute)
     {
         $this->attribute = $attribute;
         return $this;
@@ -45,7 +45,7 @@ class AttributeValue extends AbstractModel
     /**
      * @param array<mixed> $values
      */
-    public function setValues(array $values): self
+    public function setValues(array $values)
     {
         $this->values = $values;
         return $this;

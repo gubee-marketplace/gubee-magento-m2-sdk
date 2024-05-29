@@ -12,17 +12,17 @@ class TypeEnum extends AbstractEnum
     private const GRAM     = 'GRAM';
     private const KILOGRAM = 'KILOGRAM';
 
-    public static function POUND(): self
+    public static function POUND()
     {
         return new self(self::POUND);
     }
 
-    public static function GRAM(): self
+    public static function GRAM()
     {
         return new self(self::GRAM);
     }
 
-    public static function KILOGRAM(): self
+    public static function KILOGRAM()
     {
         return new self(self::KILOGRAM);
     }
@@ -32,7 +32,7 @@ class TypeEnum extends AbstractEnum
      *
      * @param mixed $value
      */
-    public static function fromValue($value): self
+    public static function fromValue($value)
     {
         return new self($value);
     }

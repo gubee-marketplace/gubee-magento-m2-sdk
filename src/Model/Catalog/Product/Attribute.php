@@ -67,7 +67,7 @@ class Attribute extends AbstractModel
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name)
     {
         $this->name = $name;
         return $this;
@@ -78,7 +78,7 @@ class Attribute extends AbstractModel
         return $this->attrType;
     }
 
-    public function setAttrType(TypeEnum $attrType): self
+    public function setAttrType(TypeEnum $attrType)
     {
         $this->attrType = $attrType;
         return $this;
@@ -89,7 +89,7 @@ class Attribute extends AbstractModel
         return $this->hubeeId;
     }
 
-    public function setHubeeId(string $hubeeId): self
+    public function setHubeeId(string $hubeeId)
     {
         $this->hubeeId = $hubeeId;
         return $this;
@@ -100,7 +100,7 @@ class Attribute extends AbstractModel
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function setId(string $id)
     {
         $this->id = $id;
         return $this;
@@ -111,7 +111,7 @@ class Attribute extends AbstractModel
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(string $label)
     {
         $this->label = $label;
         return $this;
@@ -128,7 +128,7 @@ class Attribute extends AbstractModel
     /**
      * @param array<string> $options
      */
-    public function setOptions(array $options): self
+    public function setOptions(array $options)
     {
         $this->validateArrayElements(
             $options,
@@ -143,7 +143,7 @@ class Attribute extends AbstractModel
         return $this->required ?: false;
     }
 
-    public function setRequired(bool $required): self
+    public function setRequired(bool $required)
     {
         $this->required = $required;
         return $this;
@@ -154,7 +154,7 @@ class Attribute extends AbstractModel
         return $this->variant;
     }
 
-    public function setVariant(?bool $variant): self
+    public function setVariant(?bool $variant)
     {
         $this->variant = $variant;
         return $this;

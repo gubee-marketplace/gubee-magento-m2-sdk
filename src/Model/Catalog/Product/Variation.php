@@ -139,7 +139,7 @@ class Variation extends AbstractModel
         return $this->skuId;
     }
 
-    public function setSkuId(string $skuId): self
+    public function setSkuId(string $skuId)
     {
         $this->skuId = $skuId;
         return $this;
@@ -156,7 +156,7 @@ class Variation extends AbstractModel
     /**
      * @param array<Image> $images
      */
-    public function setImages(array $images): self
+    public function setImages(array $images)
     {
         $this->validateArrayElements($images, Image::class);
         $this->images = $images;
@@ -168,7 +168,7 @@ class Variation extends AbstractModel
         return $this->dimension;
     }
 
-    public function setDimension(Dimension $dimension): self
+    public function setDimension(Dimension $dimension)
     {
         $this->dimension = $dimension;
         return $this;
@@ -179,7 +179,7 @@ class Variation extends AbstractModel
         return $this->handlingTime;
     }
 
-    public function setHandlingTime(UnitTime $handlingTime): self
+    public function setHandlingTime(UnitTime $handlingTime)
     {
         $this->handlingTime = $handlingTime;
         return $this;
@@ -190,7 +190,7 @@ class Variation extends AbstractModel
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name)
     {
         $this->name = $name;
         return $this;
@@ -201,7 +201,7 @@ class Variation extends AbstractModel
         return $this->sku;
     }
 
-    public function setSku(string $sku): self
+    public function setSku(string $sku)
     {
         $this->sku = $sku;
         return $this;
@@ -212,7 +212,7 @@ class Variation extends AbstractModel
         return $this->warrantyTime;
     }
 
-    public function setWarrantyTime(UnitTime $warrantyTime): self
+    public function setWarrantyTime(UnitTime $warrantyTime)
     {
         $this->warrantyTime = $warrantyTime;
         return $this;
@@ -223,7 +223,7 @@ class Variation extends AbstractModel
         return $this->cost;
     }
 
-    public function setCost(?float $cost): self
+    public function setCost(?float $cost)
     {
         $this->cost = $cost;
         return $this;
@@ -234,7 +234,7 @@ class Variation extends AbstractModel
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description)
     {
         $this->description = $description;
         return $this;
@@ -245,7 +245,7 @@ class Variation extends AbstractModel
         return $this->ean;
     }
 
-    public function setEan(?string $ean): self
+    public function setEan(?string $ean)
     {
         $this->ean = $ean;
         return $this;
@@ -256,7 +256,7 @@ class Variation extends AbstractModel
         return $this->main;
     }
 
-    public function setMain(?bool $main): self
+    public function setMain(?bool $main)
     {
         $this->main = $main;
         return $this;
@@ -273,7 +273,7 @@ class Variation extends AbstractModel
     /**
      * @param array<Price> $prices
      */
-    public function setPrices(array $prices): self
+    public function setPrices(array $prices)
     {
         $this->validateArrayElements(
             $prices,
@@ -288,7 +288,7 @@ class Variation extends AbstractModel
         return $this->status;
     }
 
-    public function setStatus(StatusEnum $status): self
+    public function setStatus(StatusEnum $status)
     {
         $this->status = $status;
         return $this;
@@ -305,7 +305,7 @@ class Variation extends AbstractModel
     /**
      * @param array<Stock> $stocks
      */
-    public function setStocks(array $stocks): self
+    public function setStocks(array $stocks)
     {
         $this->validateArrayElements(
             $stocks,
@@ -326,7 +326,7 @@ class Variation extends AbstractModel
     /**
      * @param array<AttributeValue> $variantSpecification
      */
-    public function setVariantSpecification(array $variantSpecification): self
+    public function setVariantSpecification(array $variantSpecification)
     {
         $this->validateArrayElements(
             $variantSpecification,

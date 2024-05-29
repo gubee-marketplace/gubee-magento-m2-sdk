@@ -12,7 +12,7 @@ use function sprintf;
 
 class Authenticate implements Plugin
 {
-    protected string $token;
+    protected $token;
 
     public function __construct(string $token)
     {

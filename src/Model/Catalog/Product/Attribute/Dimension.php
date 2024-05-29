@@ -66,7 +66,7 @@ class Dimension extends AbstractModel
         return $this->depth;
     }
 
-    public function setDepth(Measure $depth): self
+    public function setDepth(Measure $depth)
     {
         $this->depth = $depth;
         return $this;
@@ -77,7 +77,7 @@ class Dimension extends AbstractModel
         return $this->height;
     }
 
-    public function setHeight(Measure $height): self
+    public function setHeight(Measure $height)
     {
         $this->height = $height;
         return $this;
@@ -88,7 +88,7 @@ class Dimension extends AbstractModel
         return $this->weight;
     }
 
-    public function setWeight(Weight $weight): self
+    public function setWeight(Weight $weight)
     {
         $this->weight = $weight;
         return $this;
@@ -99,7 +99,7 @@ class Dimension extends AbstractModel
         return $this->width;
     }
 
-    public function setWidth(Measure $width): self
+    public function setWidth(Measure $width)
     {
         $this->width = $width;
         return $this;

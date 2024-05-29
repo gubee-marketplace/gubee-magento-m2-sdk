@@ -20,28 +20,28 @@ use Gubee\SDK\Resource\Catalog\Product\Attribute\BrandResource;
 use Throwable;
 
 class Product extends AbstractModel {
-    protected Brand $brand;
-    protected string $id;
-    protected Category $mainCategory;
-    protected string $mainSku;
-    protected OriginEnum $origin;
-    protected StatusEnum $status;
-    protected TypeEnum $type;
-    protected ?string $hubeeId = null;
-    protected ?string $name = null;
-    protected ?string $nbm = null;
+    protected $brand;
+    protected $id;
+    protected $mainCategory;
+    protected $mainSku;
+    protected $origin;
+    protected $status;
+    protected $type;
+    protected $hubeeId = null;
+    protected $name = null;
+    protected $nbm = null;
     /** @var array<Account>|null */
-    protected ?array $accounts = null;
+    protected $accounts = null;
     /** @var array<Category>|null */
-    protected ?array $categories = null;
+    protected $categories = null;
     /** @var array<AttributeValue>|null */
-    protected ?array $specifications = null;
+    protected $specifications = null;
     /** @var array<AttributeValue>|null */
-    protected ?array $variantAttributes = null;
+    protected $variantAttributes = null;
     /** @var array<Variation>|null */
-    protected ?array $variations = null;
-    protected BrandResource $brandResource;
-    protected ProductResource $productResource;
+    protected $variations = null;
+    protected $brandResource;
+    protected $productResource;
 
     /**
      * @param Brand|array<int|string, mixed> $brand
@@ -167,7 +167,7 @@ class Product extends AbstractModel {
         }
     }
 
-    public function load(string $id, string $field = 'externalId'): self {
+    public function load(string $id, string $field = 'externalId') {
         switch ($field) {
         case 'externalId':
             $product = $this->productResource->loadById($id);
@@ -206,7 +206,7 @@ class Product extends AbstractModel {
         return $this->brand;
     }
 
-    public function setBrand(Brand $brand): self {
+    public function setBrand(Brand $brand) {
         if (!$brand->getHubeeId()) {
             try {
                 $brand = $this->brandResource->loadByName(
@@ -224,7 +224,7 @@ class Product extends AbstractModel {
         return $this->id;
     }
 
-    public function setId(string $id): self {
+    public function setId(string $id) {
         $this->id = $id;
         return $this;
     }
@@ -233,7 +233,7 @@ class Product extends AbstractModel {
         return $this->mainCategory;
     }
 
-    public function setMainCategory(Category $mainCategory): self {
+    public function setMainCategory(Category $mainCategory) {
         $this->mainCategory = $mainCategory;
         return $this;
     }
@@ -242,7 +242,7 @@ class Product extends AbstractModel {
         return $this->mainSku;
     }
 
-    public function setMainSku(string $mainSku): self {
+    public function setMainSku(string $mainSku) {
         $this->mainSku = $mainSku;
         return $this;
     }
@@ -251,7 +251,7 @@ class Product extends AbstractModel {
         return $this->origin;
     }
 
-    public function setOrigin(OriginEnum $origin): self {
+    public function setOrigin(OriginEnum $origin) {
         $this->origin = $origin;
         return $this;
     }
@@ -260,7 +260,7 @@ class Product extends AbstractModel {
         return $this->status;
     }
 
-    public function setStatus(StatusEnum $status): self {
+    public function setStatus(StatusEnum $status) {
         $this->status = $status;
         return $this;
     }
@@ -269,7 +269,7 @@ class Product extends AbstractModel {
         return $this->type;
     }
 
-    public function setType(TypeEnum $type): self {
+    public function setType(TypeEnum $type) {
         $this->type = $type;
         return $this;
     }
@@ -278,7 +278,7 @@ class Product extends AbstractModel {
         return $this->hubeeId;
     }
 
-    public function setHubeeId(?string $hubeeId): self {
+    public function setHubeeId(?string $hubeeId) {
         $this->hubeeId = $hubeeId;
         return $this;
     }
@@ -287,7 +287,7 @@ class Product extends AbstractModel {
         return $this->name;
     }
 
-    public function setName(?string $name): self {
+    public function setName(?string $name) {
         $this->name = $name;
         return $this;
     }
@@ -296,7 +296,7 @@ class Product extends AbstractModel {
         return $this->nbm;
     }
 
-    public function setNbm(?string $nbm): self {
+    public function setNbm(?string $nbm) {
         $this->nbm = $nbm;
         return $this;
     }
@@ -311,7 +311,7 @@ class Product extends AbstractModel {
     /**
      * @param array<Account> $accounts
      */
-    public function setAccounts(array $accounts): self {
+    public function setAccounts(array $accounts) {
         $this->validateArrayElements(
             $accounts,
             Account::class
@@ -330,7 +330,7 @@ class Product extends AbstractModel {
     /**
      * @param array<Category> $categories
      */
-    public function setCategories(array $categories): self {
+    public function setCategories(array $categories) {
         $this->validateArrayElements($categories, Category::class);
         $this->categories = $categories;
         return $this;
@@ -346,7 +346,7 @@ class Product extends AbstractModel {
     /**
      * @param  array<AttributeValue> $specifications
      */
-    public function setSpecifications(array $specifications): self {
+    public function setSpecifications(array $specifications) {
         $this->validateArrayElements($specifications, AttributeValue::class);
         $this->specifications = $specifications;
         return $this;
@@ -362,7 +362,7 @@ class Product extends AbstractModel {
     /**
      * @param  array<AttributeValue> $variantAttributes
      */
-    public function setVariantAttributes(array $variantAttributes): self {
+    public function setVariantAttributes(array $variantAttributes) {
         $this->validateArrayElements($variantAttributes, AttributeValue::class);
         $this->variantAttributes = $variantAttributes;
         return $this;
@@ -378,7 +378,7 @@ class Product extends AbstractModel {
     /**
      * @param array<Variation> $variations
      */
-    public function setVariations(?array $variations): self {
+    public function setVariations(?array $variations) {
         $this->validateArrayElements($variations, Variation::class);
         $this->variations = $variations;
         return $this;

@@ -12,17 +12,17 @@ class TypeEnum extends AbstractEnum
     private const HOURS = 'HOURS';
     private const MONTH = 'MONTH';
 
-    public static function DAYS(): self
+    public static function DAYS()
     {
         return new self(self::DAYS);
     }
 
-    public static function HOURS(): self
+    public static function HOURS()
     {
         return new self(self::HOURS);
     }
 
-    public static function MONTH(): self
+    public static function MONTH()
     {
         return new self(self::MONTH);
     }
@@ -32,7 +32,7 @@ class TypeEnum extends AbstractEnum
      *
      * @param mixed $value
      */
-    public static function fromValue($value): self
+    public static function fromValue($value)
     {
         return new self($value);
     }

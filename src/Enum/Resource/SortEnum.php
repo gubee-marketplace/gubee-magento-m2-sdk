@@ -11,12 +11,12 @@ class SortEnum extends AbstractEnum
     private const ASC  = 'asc';
     private const DESC = 'desc';
 
-    public static function ASC(): self
+    public static function ASC()
     {
         return new self(self::ASC);
     }
 
-    public static function DESC(): self
+    public static function DESC()
     {
         return new self(self::DESC);
     }
@@ -26,7 +26,7 @@ class SortEnum extends AbstractEnum
      *
      * @param mixed $value
      */
-    public static function fromValue($value): self
+    public static function fromValue($value)
     {
         return new self($value);
     }

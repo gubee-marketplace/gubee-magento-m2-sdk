@@ -11,12 +11,12 @@ class ConditionEnum extends AbstractEnum
     private const NEW  = 'NEW';
     private const USED = 'USED';
 
-    public static function NEW(): self
+    public static function NEW()
     {
         return new self(self::NEW);
     }
 
-    public static function USED(): self
+    public static function USED()
     {
         return new self(self::USED);
     }
@@ -26,7 +26,7 @@ class ConditionEnum extends AbstractEnum
      *
      * @param mixed $value
      */
-    public static function fromValue($value): self
+    public static function fromValue($value)
     {
         return new self($value);
     }
