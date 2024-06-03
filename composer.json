@@ -18,6 +18,7 @@
     ],
     "require": {
         "php": "^7.3|^7.4|^8.0|^8.1",
+        "laminas/laminas-diactoros": "^2.17",
         "php-di/php-di": "^6.3",
         "php-http/client-common": "^2.7",
         "php-http/curl-client": "^2.3",
