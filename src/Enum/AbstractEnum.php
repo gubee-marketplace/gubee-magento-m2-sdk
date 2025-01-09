@@ -55,6 +55,7 @@ abstract class AbstractEnum implements Stringable, JsonSerializable
     /**
      * @return string
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value;
