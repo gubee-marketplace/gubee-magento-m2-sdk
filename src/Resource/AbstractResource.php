@@ -40,6 +40,8 @@ abstract class AbstractResource
 
     protected Client $client;
 
+    public int $perPage;
+
     public function __construct(Client $client)
     {
         $this->client = $client;

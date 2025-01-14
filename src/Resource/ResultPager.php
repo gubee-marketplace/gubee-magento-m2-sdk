@@ -28,7 +28,7 @@ class ResultPager {
     /**
      * The number of entries to request per page.
      */
-    private int $perPage;
+    public int $perPage;
 
     /**
      * The pagination result from the API.
