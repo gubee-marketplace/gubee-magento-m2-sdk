@@ -90,4 +90,11 @@ class StockResource extends AbstractResource {
                 )
             );
     }
+
+    public function updateStockBySku(Stock $stock) {
+        return $this->put(
+            '/integration/stocks/bysku/',
+            $stock->jsonSerialize()
+        );
+    }
 }

@@ -14,6 +14,7 @@ class Stock extends AbstractModel {
     protected int $priority = 0;
     protected int $qty = 0;
     protected ?string $warehouseId = null;
+    protected ?string $sku = null;
 
     protected StockResource $stockResource;
 
@@ -26,7 +27,8 @@ class Stock extends AbstractModel {
         $crossDockingTime,
         int $priority = 0,
         int $qty = 0,
-        ?string $warehouseId = null
+        ?string $warehouseId = null,
+        ?string $sku = null
     ) {
         $this->stockResource = $stockResource;
         if (is_array($crossDockingTime)) {
@@ -40,6 +42,9 @@ class Stock extends AbstractModel {
         $this->setQty($qty);
         if ($warehouseId) {
             $this->setWarehouseId($warehouseId);
+        }
+        if ($sku) {
+            $this->setSku($sku);
         }
     }
 
@@ -96,5 +101,14 @@ class Stock extends AbstractModel {
         }
 
         return $values;
+    }
+
+    public function getSku(): ?string {
+        return $this->sku;
+    }
+
+    public function setSku(?string $sku): self {
+        $this->sku = $sku;
+        return $this;
     }
 }
