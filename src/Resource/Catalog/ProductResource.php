@@ -4,6 +4,7 @@ declare (strict_types = 1);
 
 namespace Gubee\SDK\Resource\Catalog;
 
+use Gubee\Integration\Model\Catalog\ProductV2;
 use Gubee\SDK\Model\Catalog\Product;
 use Gubee\SDK\Resource\AbstractResource;
 
@@ -169,6 +170,25 @@ class ProductResource extends AbstractResource {
         return $this->getClient()->getServiceProvider()
             ->create(
                 Product::class,
+                array_merge(
+                    [$this],
+                    $response
+                )
+            );
+    }
+
+    // POST
+    // /integration/products/v2/createupdate
+    // Create or update product
+    public function createOrUpdate(ProductV2 $product): ProductV2 {
+        $response = $this->post(
+            '/integration/products/v2/createupdate',
+            $product->jsonSerialize()
+        );
+
+        return $this->getClient()->getServiceProvider()
+            ->create(
+                ProductV2::class,
                 array_merge(
                     [$this],
                     $response
