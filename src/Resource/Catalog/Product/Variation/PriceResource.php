@@ -110,4 +110,26 @@ class PriceResource extends AbstractResource {
                 )
             );
     }
+
+    //PUT
+    // /integration/prices/bysku
+    // Update prices by sku
+    public function updatePricesBySku(string $sku, array $prices): array {
+        $response = $this->put(
+            '/integration/prices/bysku/',
+            [
+                'sku' => $sku,
+                'prices' => $prices
+            ]
+        );
+
+        return $this->getClient()->getServiceProvider()
+            ->create(
+                Price::class,
+                array_merge(
+                    [$this],
+                    $response
+                )
+            );
+    }
 }
