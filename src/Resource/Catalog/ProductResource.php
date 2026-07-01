@@ -4,7 +4,7 @@ declare (strict_types = 1);
 
 namespace Gubee\SDK\Resource\Catalog;
 
-use Gubee\Integration\Model\Catalog\ProductV2;
+use Gubee\SDK\Model\Catalog\ProductV2;
 use Gubee\SDK\Model\Catalog\Product;
 use Gubee\SDK\Resource\AbstractResource;
 
