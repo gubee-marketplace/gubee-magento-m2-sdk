@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gubee\Integration\Model\Catalog;
+namespace Gubee\SDK\Model\Catalog;
 
 use Gubee\Integration\Model\Catalog\ProductV2\Specification;
 use Gubee\Integration\Model\Catalog\ProductV2\Variation;
@@ -270,4 +270,5 @@ class ProductV2 extends AbstractModel
         $this->downloadImages = $downloadImages;
         return $this;
     }
+
 }

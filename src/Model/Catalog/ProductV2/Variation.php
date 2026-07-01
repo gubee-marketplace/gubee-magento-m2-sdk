@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gubee\Integration\Model\Catalog\ProductV2;
+namespace Gubee\SDK\Model\Catalog\ProductV2;
 
 use Gubee\SDK\Api\ServiceProviderInterface;
 use Gubee\SDK\Enum\Catalog\Product\StatusEnum;
