@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Gubee\SDK\Model\Catalog;
 
-use Gubee\Integration\Model\Catalog\ProductV2\Specification;
-use Gubee\Integration\Model\Catalog\ProductV2\Variation;
+use Gubee\SDK\Model\Catalog\ProductV2\Specification;
+use Gubee\SDK\Model\Catalog\ProductV2\Variation;
 use Gubee\SDK\Api\ServiceProviderInterface;
 use Gubee\SDK\Enum\Catalog\Product\Attribute\OriginEnum;
 use Gubee\SDK\Enum\Catalog\Product\StatusEnum;
