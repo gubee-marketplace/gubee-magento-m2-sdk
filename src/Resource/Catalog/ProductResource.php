@@ -180,19 +180,12 @@ class ProductResource extends AbstractResource {
     // POST
     // /integration/products/v2/createupdate
     // Create or update product
-    public function createOrUpdate(ProductV2 $product): ProductV2 {
+    public function createOrUpdate(ProductV2 $product) {
         $response = $this->post(
             '/integration/products/v2/createupdate',
             $product->jsonSerialize()
         );
 
-        return $this->getClient()->getServiceProvider()
-            ->create(
-                ProductV2::class,
-                array_merge(
-                    [$this],
-                    $response
-                )
-            );
+        return $response;
     }
 }
