@@ -32,6 +32,7 @@
 
 ### Fixed
 
+- 🐛 fix(ci): corrige dry-run do Rector [[24d5f3d](https://github.com/maco-studios/gubee-php-sdk/commit/24d5f3d358636c2f53855178f7b606ece146214d)]
 - 🐛 fix(ci): corrige automações de escrita e gates de qualidade [[cd2ed39](https://github.com/maco-studios/gubee-php-sdk/commit/cd2ed39984a613763aeb7d54af16e87525c97fee)]
 - 🐛 fix(product): ajusta hidratação opcional de variações [[320bbee](https://github.com/maco-studios/gubee-php-sdk/commit/320bbeeb3e1a62642434fe5a37da441bcd95c225)]
 - ✏️ Fix namespace typo [[f0c1e25](https://github.com/maco-studios/gubee-php-sdk/commit/f0c1e25781974e2eb2f00c66fb993affb1134d86)]
@@ -41,7 +42,12 @@
 
 ### Miscellaneous
 
+- 📝 docs(contributors): atualiza banner de contributors [[7e7133a](https://github.com/maco-studios/gubee-php-sdk/commit/7e7133a066c525a4f615feaffda82a775de2e9dc)]
+- 📝 Update CHANGELOG [[10fc8a6](https://github.com/maco-studios/gubee-php-sdk/commit/10fc8a6cba1c6a73f1d4efd3e99364d80102af07)]
 - 📝 docs(contributors): atualiza banner de contributors [[3c22308](https://github.com/maco-studios/gubee-php-sdk/commit/3c223087db24d54040ada840ec6b91130b75cd6f)]
+-  Merge pull request [#4](https://github.com/maco-studios/gubee-php-sdk/issues/4) from maco-studios/codex/local-coverage-badge [[044679c](https://github.com/maco-studios/gubee-php-sdk/commit/044679c60d7800caa7c17c1b7847575c6e928593)]
+- 📝 docs(readme): adiciona badge local de cobertura [[2e227d8](https://github.com/maco-studios/gubee-php-sdk/commit/2e227d8bda6b8a4a9a546960de24b0c5c1419729)]
+-  Merge pull request [#3](https://github.com/maco-studios/gubee-php-sdk/issues/3) from maco-studios/codex/fix-rector-quality [[44a25aa](https://github.com/maco-studios/gubee-php-sdk/commit/44a25aafbabee907fd59d372d75015b769343f65)]
 -  Merge pull request [#2](https://github.com/maco-studios/gubee-php-sdk/issues/2) from maco-studios/001-model-hydration-seam [[07006a7](https://github.com/maco-studios/gubee-php-sdk/commit/07006a78fa2ca6f31e0ea359746dd612f6474567)]
 -  Merge pull request [#1](https://github.com/maco-studios/gubee-php-sdk/issues/1) from maco-studios/001-model-hydration-seam [[f60a1c0](https://github.com/maco-studios/gubee-php-sdk/commit/f60a1c028ab68f138cf3c4997d0f8b8e172253dc)]
 -  👷 ci(automation): automatiza changelog e banner de contributors [[08225e7](https://github.com/maco-studios/gubee-php-sdk/commit/08225e7f2f2d69e7c131a60925b8889146d29f33)]
