@@ -32,9 +32,14 @@
 
 ### Fixed
 
+- 🐛 fix(sync): preserva hidratação de custo do ProductV2 [[f631e5a](https://github.com/maco-studios/gubee-php-sdk/commit/f631e5a6afec0ac580aadf6355bf5a6a22f8c57c)]
+- 🐛 fix(sync): preserva hidratação de custo do ProductV2 [[4d28764](https://github.com/maco-studios/gubee-php-sdk/commit/4d28764010f309e2c28f297d93a113187dbc373e)]
+- 🐛 Fix on certain aspects of the New createupdate flow [[925d3fe](https://github.com/maco-studios/gubee-php-sdk/commit/925d3fe854e1e9f0aaa6691bc4775ae46bbec2a6)]
 - 🐛 fix(ci): corrige dry-run do Rector [[24d5f3d](https://github.com/maco-studios/gubee-php-sdk/commit/24d5f3d358636c2f53855178f7b606ece146214d)]
 - 🐛 fix(ci): corrige automações de escrita e gates de qualidade [[cd2ed39](https://github.com/maco-studios/gubee-php-sdk/commit/cd2ed39984a613763aeb7d54af16e87525c97fee)]
 - 🐛 fix(product): ajusta hidratação opcional de variações [[320bbee](https://github.com/maco-studios/gubee-php-sdk/commit/320bbeeb3e1a62642434fe5a37da441bcd95c225)]
+- 🐛 Fix API calls [[4dc0c33](https://github.com/maco-studios/gubee-php-sdk/commit/4dc0c336d6f072c41c9f7fa695b7f252a7612b64)]
+- 🐛 Fix on certain aspects of the New createupdate flow [[73d0dfb](https://github.com/maco-studios/gubee-php-sdk/commit/73d0dfb22c380cf3d0aca8751578136b026df1a3)]
 - ✏️ Fix namespace typo [[f0c1e25](https://github.com/maco-studios/gubee-php-sdk/commit/f0c1e25781974e2eb2f00c66fb993affb1134d86)]
 - ✏️ Fix namespace typo [[729c081](https://github.com/maco-studios/gubee-php-sdk/commit/729c0811529dd8284c03c15400e6f1e0619ff93e)]
 - 🐛 Ajustes criação de propriedades e visibilidade [[30a2dca](https://github.com/maco-studios/gubee-php-sdk/commit/30a2dcaf296c9ad0db5d5b672fbc997ae5114e2d)]
@@ -42,9 +47,15 @@
 
 ### Miscellaneous
 
+- 📝 Update CHANGELOG [[5cf7d4e](https://github.com/maco-studios/gubee-php-sdk/commit/5cf7d4ee83d8a71855ce16605a891b4764d92d79)]
 - 📝 docs(contributors): atualiza banner de contributors [[7e7133a](https://github.com/maco-studios/gubee-php-sdk/commit/7e7133a066c525a4f615feaffda82a775de2e9dc)]
 - 📝 Update CHANGELOG [[10fc8a6](https://github.com/maco-studios/gubee-php-sdk/commit/10fc8a6cba1c6a73f1d4efd3e99364d80102af07)]
 - 📝 docs(contributors): atualiza banner de contributors [[3c22308](https://github.com/maco-studios/gubee-php-sdk/commit/3c223087db24d54040ada840ec6b91130b75cd6f)]
+-  Merge pull request [#8](https://github.com/maco-studios/gubee-php-sdk/issues/8) from maco-studios/codex/auto-coverage-badge [[3893808](https://github.com/maco-studios/gubee-php-sdk/commit/3893808651ef218bccf25f49dc277afcdd6ee719)]
+-  👷 ci(coverage): atualiza badge automaticamente [[22647e5](https://github.com/maco-studios/gubee-php-sdk/commit/22647e5f96fe59fe57438c1dc93f4119ca8db707)]
+-  Merge pull request [#7](https://github.com/maco-studios/gubee-php-sdk/issues/7) from maco-studios/codex/fix-pr-6-conflicts [[52e3172](https://github.com/maco-studios/gubee-php-sdk/commit/52e31721f774f8d107ce700fb935277ebfe086ac)]
+-  Merge remote-tracking branch &#x27;upstream/main&#x27; into codex/fix-pr-6-conflicts [[460a862](https://github.com/maco-studios/gubee-php-sdk/commit/460a862975a3db86bf5a5767c1ea34aed1160ae7)]
+-  Merge pull request [#5](https://github.com/maco-studios/gubee-php-sdk/issues/5) from maco-studios/codex/sync-upstream-main [[3d0ef8d](https://github.com/maco-studios/gubee-php-sdk/commit/3d0ef8dc413401f9f3dc24c3fe8ed1d4c839bec8)]
 -  Merge pull request [#4](https://github.com/maco-studios/gubee-php-sdk/issues/4) from maco-studios/codex/local-coverage-badge [[044679c](https://github.com/maco-studios/gubee-php-sdk/commit/044679c60d7800caa7c17c1b7847575c6e928593)]
 - 📝 docs(readme): adiciona badge local de cobertura [[2e227d8](https://github.com/maco-studios/gubee-php-sdk/commit/2e227d8bda6b8a4a9a546960de24b0c5c1419729)]
 -  Merge pull request [#3](https://github.com/maco-studios/gubee-php-sdk/issues/3) from maco-studios/codex/fix-rector-quality [[44a25aa](https://github.com/maco-studios/gubee-php-sdk/commit/44a25aafbabee907fd59d372d75015b769343f65)]
@@ -52,6 +63,7 @@
 -  Merge pull request [#1](https://github.com/maco-studios/gubee-php-sdk/issues/1) from maco-studios/001-model-hydration-seam [[f60a1c0](https://github.com/maco-studios/gubee-php-sdk/commit/f60a1c028ab68f138cf3c4997d0f8b8e172253dc)]
 -  👷 ci(automation): automatiza changelog e banner de contributors [[08225e7](https://github.com/maco-studios/gubee-php-sdk/commit/08225e7f2f2d69e7c131a60925b8889146d29f33)]
 - 📝 docs(repo): documenta manutenção e colaboração do projeto [[e7bf6a9](https://github.com/maco-studios/gubee-php-sdk/commit/e7bf6a93dd99b3a6bd7ccee50057fcf5c17062ab)]
+-  Merge pull request [#4](https://github.com/maco-studios/gubee-php-sdk/issues/4) from gubee-marketplace/feature/create-or-update-products [[1d973ec](https://github.com/maco-studios/gubee-php-sdk/commit/1d973ec99b29a3b725715185a5481edc3cdd8145)]
 -  Merge pull request [#3](https://github.com/maco-studios/gubee-php-sdk/issues/3) from gubee-marketplace/feature/create-or-update-products [[ea44237](https://github.com/maco-studios/gubee-php-sdk/commit/ea442377f09ea2d469cde421c1aaab6897a851a0)]
 -  Merge pull request [#2](https://github.com/maco-studios/gubee-php-sdk/issues/2) from gubee-marketplace/feature/create-or-update-products [[a62abf9](https://github.com/maco-studios/gubee-php-sdk/commit/a62abf9615d8b8a162f9663d98836808eb36c929)]
 -  Merge pull request [#1](https://github.com/maco-studios/gubee-php-sdk/issues/1) from gubee-marketplace/feature/create-or-update-products [[c1a35b8](https://github.com/maco-studios/gubee-php-sdk/commit/c1a35b870288ee33d95df261af2c93b78e9b8957)]
