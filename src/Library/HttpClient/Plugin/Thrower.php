@@ -38,6 +38,7 @@ use const PHP_EOL;
 
 class Thrower implements Plugin
 {
+    /** @var LoggerInterface */
     private $logger;
 
     public function __construct(LoggerInterface $logger)

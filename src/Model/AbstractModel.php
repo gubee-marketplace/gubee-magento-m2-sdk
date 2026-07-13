@@ -89,7 +89,7 @@ class AbstractModel implements JsonSerializable
     protected function validateArrayElements(array $array, string $type): bool
     {
         foreach ($array as $element) {
-            if ($type == 'string') {
+            if ($type === 'string') {
                 if (! is_string($element)) {
                     throw new InvalidArgumentException(
                         sprintf(
@@ -99,7 +99,7 @@ class AbstractModel implements JsonSerializable
                         )
                     );
                 }
-            } elseif ($type == 'int') {
+            } elseif ($type === 'int') {
                 if (! is_int($element)) {
                     throw new InvalidArgumentException(
                         sprintf(
@@ -109,7 +109,7 @@ class AbstractModel implements JsonSerializable
                         )
                     );
                 }
-            } elseif ($type == 'float') {
+            } elseif ($type === 'float') {
                 if (! is_float($element)) {
                     throw new InvalidArgumentException(
                         sprintf(
@@ -119,7 +119,7 @@ class AbstractModel implements JsonSerializable
                         )
                     );
                 }
-            } elseif ($type == 'bool') {
+            } elseif ($type === 'bool') {
                 if (! is_bool($element)) {
                     throw new InvalidArgumentException(
                         sprintf(

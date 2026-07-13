@@ -208,7 +208,7 @@ class Product extends AbstractModel
         return $product;
     }
 
-    public function save()
+    public function save(): self
     {
         try {
             $this->productResource->update(
@@ -258,7 +258,7 @@ class Product extends AbstractModel
         return $this->mainCategory;
     }
 
-    public function setMainCategory($mainCategory): self
+    public function setMainCategory(Category|string $mainCategory): self
     {
         if (is_string($mainCategory)) {
             $mainCategory = $this->serviceProvider->create(

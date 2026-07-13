@@ -8,8 +8,8 @@ use Gubee\SDK\Model\Catalog\Product\Attribute;
 use Gubee\SDK\Model\Common\PagedResult;
 use Gubee\SDK\Resource\AbstractResource;
 
+use function count;
 use function rawurlencode;
-use function sizeof;
 
 class AttributeResource extends AbstractResource
 {
@@ -74,7 +74,7 @@ class AttributeResource extends AbstractResource
                 );
         }
 
-        return sizeof($response) > 0;
+        return count($response) > 0;
     }
 
     /**
@@ -89,7 +89,7 @@ class AttributeResource extends AbstractResource
             $attributes
         );
 
-        return sizeof($response) > 0;
+        return count($response) > 0;
     }
 
     public function loadById(string $id): Attribute
@@ -132,7 +132,7 @@ class AttributeResource extends AbstractResource
             );
     }
 
-    public function listAll_2($pageable): PagedResult
+    public function listAll_2(mixed $pageable): PagedResult
     {
         $query = [
             'pageable' => $pageable,

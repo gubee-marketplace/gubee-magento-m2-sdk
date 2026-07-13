@@ -35,7 +35,7 @@ class OrderResource extends AbstractResource
     // Update order to cancel
     public function cancelOrder(string $orderId, ?DateTimeInterface $cancelDt = null): OrderApi
     {
-        if ($cancelDt == null) {
+        if ($cancelDt === null) {
             $cancelDt = new DateTime(
                 'now',
                 new DateTimeZone('UTC')

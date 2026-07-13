@@ -262,7 +262,7 @@ class ResultPager
         // add sort if doesn't exist
         $sort = false;
         foreach ($query as $item) {
-            if ($item[0] == 'sort') {
+            if ($item[0] === 'sort') {
                 $sort = true;
             }
         }
@@ -292,7 +292,7 @@ class ResultPager
 
     private static function bindPerPage(AbstractResource $api, int $perPage): AbstractResource
     {
-        /** @var Closure(AbstractResource): AbstractResource */
+        /** @var Closure(AbstractResource): AbstractResource $closure */
         $closure = Closure::bind(static function (AbstractResource $api) use ($perPage): AbstractResource {
             $clone = clone $api;
 

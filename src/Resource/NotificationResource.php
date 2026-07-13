@@ -13,7 +13,7 @@ use function rawurlencode;
 
 class NotificationResource extends AbstractResource
 {
-    public function missed(string $urlName, $pageable): PagedResult
+    public function missed(string $urlName, mixed $pageable): PagedResult
     {
         $query = [
             'pageable' => $pageable,

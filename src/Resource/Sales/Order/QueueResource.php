@@ -14,7 +14,7 @@ use function rawurlencode;
 
 class QueueResource extends AbstractResource
 {
-    public function listOrdersByStatusQueue(string $status, $pageable): PagedResult
+    public function listOrdersByStatusQueue(string $status, mixed $pageable): PagedResult
     {
         $query = [
             'pageable' => $pageable,
@@ -28,7 +28,7 @@ class QueueResource extends AbstractResource
         );
     }
 
-    public function listOrdersByStatusQueue_1(string $status, $pageable): PagedResult
+    public function listOrdersByStatusQueue_1(string $status, mixed $pageable): PagedResult
     {
         $query = [
             'pageable' => $pageable,
@@ -42,7 +42,7 @@ class QueueResource extends AbstractResource
         );
     }
 
-    public function listRejectedQueueOrders($pageable): PagedResult
+    public function listRejectedQueueOrders(mixed $pageable): PagedResult
     {
         $query = [
             'pageable' => $pageable,

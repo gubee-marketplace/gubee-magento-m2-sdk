@@ -58,7 +58,7 @@ class PromotionResource extends AbstractResource
         );
     }
 
-    public function searchPromotions($pageable, SearchParams|array $payload): PagedResult
+    public function searchPromotions(mixed $pageable, SearchParams|array $payload): PagedResult
     {
         $query = [
             'pageable' => $pageable,
@@ -113,7 +113,7 @@ class PromotionResource extends AbstractResource
         );
     }
 
-    public function listPromotions($pageable): PagedResult
+    public function listPromotions(mixed $pageable): PagedResult
     {
         $query = [
             'pageable' => $pageable,

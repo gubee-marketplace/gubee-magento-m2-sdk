@@ -233,7 +233,7 @@ class BrandResource extends AbstractResource
         return $this->hydrateModel(EmptyResult::class, []);
     }
 
-    public function listAllBrands($pageable): PagedResult
+    public function listAllBrands(mixed $pageable): PagedResult
     {
         $query = [
             'pageable' => $pageable,

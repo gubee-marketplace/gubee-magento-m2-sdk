@@ -31,7 +31,7 @@ class NotificationResource extends AbstractResource
                 [
                     'page' => $page,
                     'size' => $size,
-                    'sort' => $sort != null
+                    'sort' => $sort !== null
                 ? $sort->__toString()
                 : SortEnum::ASC()->__toString(),
                 ]
@@ -71,7 +71,7 @@ class NotificationResource extends AbstractResource
                 [
                     'page' => $page,
                     'size' => $size,
-                    'sort' => $sort != null
+                    'sort' => $sort !== null
                 ? $sort->__toString()
                 : SortEnum::ASC()->__toString(),
                 ]
@@ -111,7 +111,7 @@ class NotificationResource extends AbstractResource
                 [
                     'page' => $page,
                     'size' => $size,
-                    'sort' => $sort != null
+                    'sort' => $sort !== null
                 ? $sort->__toString()
                 : SortEnum::ASC()->__toString(),
                 ]
@@ -151,7 +151,7 @@ class NotificationResource extends AbstractResource
                 [
                     'page' => $page,
                     'size' => $size,
-                    'sort' => $sort != null
+                    'sort' => $sort !== null
                 ? $sort->__toString()
                 : SortEnum::ASC()->__toString(),
                 ]
@@ -191,7 +191,7 @@ class NotificationResource extends AbstractResource
                 [
                     'page' => $page,
                     'size' => $size,
-                    'sort' => $sort != null
+                    'sort' => $sort !== null
                 ? $sort->__toString()
                 : SortEnum::ASC()->__toString(),
                 ]
@@ -231,7 +231,7 @@ class NotificationResource extends AbstractResource
                 [
                     'page' => $page,
                     'size' => $size,
-                    'sort' => $sort != null
+                    'sort' => $sort !== null
                 ? $sort->__toString()
                 : SortEnum::ASC()->__toString(),
                 ]
@@ -271,7 +271,7 @@ class NotificationResource extends AbstractResource
                 [
                     'page' => $page,
                     'size' => $size,
-                    'sort' => $sort != null
+                    'sort' => $sort !== null
                 ? $sort->__toString()
                 : SortEnum::ASC()->__toString(),
                 ]
@@ -309,7 +309,7 @@ class NotificationResource extends AbstractResource
                 [
                     'page' => $page,
                     'size' => $size,
-                    'sort' => $sort != null
+                    'sort' => $sort !== null
                 ? $sort->__toString()
                 : SortEnum::ASC()->__toString(),
                 ]
