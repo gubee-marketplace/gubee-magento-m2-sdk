@@ -1,0 +1,31 @@
+name: Feature request
+description: Proponha uma nova capacidade para o SDK
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema
+      description: Qual necessidade real isso resolve?
+      placeholder: Hoje não existe forma de ...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposta
+      description: Descreva a API ou comportamento esperado.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: O que você tentou ou avaliou?
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impacto esperado
+      description: Compatibilidade, adoção e riscos.

@@ -1,0 +1,7 @@
+{
+  "project": {
+    "name": "gubee-php-sdk",
+    "description": "SDK PHP para integracao com a API da Gubee.",
+    "version": "1.0.0"
+  }
+}
