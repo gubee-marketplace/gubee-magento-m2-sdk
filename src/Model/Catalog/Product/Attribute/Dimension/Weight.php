@@ -29,7 +29,7 @@ class Weight extends AbstractModel
 
     public function getType(): TypeEnum
     {
-        if ($this->type == TypeEnum::POUND()) {
+        if ((string) $this->type === (string) TypeEnum::POUND()) {
             return TypeEnum::KILOGRAM();
         }
 

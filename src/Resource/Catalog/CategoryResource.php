@@ -99,7 +99,7 @@ class CategoryResource extends AbstractResource
         );
     }
 
-    public function listAll_1($pageable): PagedResult
+    public function listAll_1(mixed $pageable): PagedResult
     {
         $query = [
             'pageable' => $pageable,
