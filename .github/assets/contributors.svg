@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="160" viewBox="0 0 960 160" role="img" aria-labelledby="title desc">
+  <title id="title">Contributors banner</title>
+  <desc id="desc">Placeholder banner until the contributors workflow generates the final asset.</desc>
+  <rect width="960" height="160" fill="#f5f7fb" rx="16" />
+  <rect x="24" y="24" width="912" height="112" fill="#ffffff" rx="12" stroke="#d9e2f2" />
+  <text x="48" y="68" fill="#1f2937" font-family="Arial, sans-serif" font-size="24" font-weight="700">
+    Contributors
+  </text>
+  <text x="48" y="102" fill="#4b5563" font-family="Arial, sans-serif" font-size="16">
+    This banner is updated automatically by the GitHub Actions contributors workflow.
+  </text>
+</svg>

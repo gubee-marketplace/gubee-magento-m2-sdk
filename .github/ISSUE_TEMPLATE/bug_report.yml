@@ -1,0 +1,53 @@
+name: Bug report
+description: Reporte um comportamento incorreto no SDK
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Descreva o problema com o máximo de contexto reprodutível.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Resumo
+      description: O que está quebrado?
+      placeholder: O método X retorna Y quando deveria retornar Z.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir
+      description: Informe passos claros e mínimos.
+      placeholder: |
+        1. Instancie ...
+        2. Chame ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamento atual
+    validations:
+      required: true
+  - type: input
+    id: php_version
+    attributes:
+      label: Versão do PHP
+      placeholder: "8.3.9"
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Contexto adicional
+      description: Stack trace, payload, logs ou links relevantes.
