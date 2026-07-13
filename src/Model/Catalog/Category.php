@@ -154,7 +154,7 @@ class Category extends AbstractModel
                 [
                     'serviceProvider'  => $this->serviceProvider,
                     'categoryResource' => $this->categoryResource,
-                    'id'               => $parent,
+                    'id'               => (string) $parent,
                 ]
             );
         }
