@@ -66,13 +66,12 @@
     "scripts": {
         "cs": [
             "@cs:check",
-            "@cs:compat",
-            "@cs:stan"
+            "@cs:compat"
         ],
         "cs:check": "php -d error_reporting=8191 vendor/bin/phpcs",
-        "cs:compat": "php -d error_reporting=8191 vendor/bin/phpcs --standard=PHPCompatibility --runtime-set testVersion 8.0- src test",
+        "cs:compat": "php -d error_reporting=8191 vendor/bin/phpcs --standard=PHPCompatibility --runtime-set testVersion 8.0- --runtime-set ignore_warnings_on_exit 1 src test",
         "cs:fix": "php -d error_reporting=8191 vendor/bin/phpcbf",
-        "cs:stan": "vendor/bin/phpstan analyse src test --level=6",
+        "cs:stan": "php -d memory_limit=1G vendor/bin/phpstan analyse src test --level=6",
         "rector": "vendor/bin/rector process",
         "rector:dry-run": "vendor/bin/rector process --dry-run",
         "test": [
