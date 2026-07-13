@@ -44,10 +44,6 @@ class Weight extends AbstractModel
 
     public function getValue(): float
     {
-        if ($this->getType() === TypeEnum::POUND()) {
-            return $this->value * 0.453592;
-        }
-
         return $this->value;
     }
 
