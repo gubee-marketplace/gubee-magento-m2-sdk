@@ -16,6 +16,9 @@ permissions:
 jobs:
   contributors:
     runs-on: ubuntu-latest
+    concurrency:
+      group: repo-write-main
+      cancel-in-progress: false
 
     steps:
       - name: Checkout
@@ -41,4 +44,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .github/assets/contributors.svg
           git commit -m "📝 docs(contributors): atualiza banner de contributors"
+          git pull --rebase origin main
           git push
