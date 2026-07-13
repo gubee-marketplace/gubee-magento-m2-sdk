@@ -14,7 +14,6 @@ use Gubee\SDK\Model\Catalog\Product\Variation\Media\Image;
 use Gubee\SDK\Model\Catalog\Product\Variation\Price;
 use Gubee\SDK\Model\Catalog\Product\Variation\Stock;
 
-use function is_array;
 use function is_string;
 
 class Variation extends AbstractModel
@@ -22,15 +21,15 @@ class Variation extends AbstractModel
     protected string $skuId;
     /** @var array<Image> */
     protected array $images;
-    protected Dimension $dimension;
-    protected UnitTime $handlingTime;
+    protected ?Dimension $dimension   = null;
+    protected ?UnitTime $handlingTime = null;
     protected string $name;
     protected string $sku;
-    protected UnitTime $warrantyTime;
-    protected ?float $cost         = null;
-    protected ?string $description = null;
-    protected ?string $ean         = null;
-    protected ?bool $main          = null;
+    protected ?UnitTime $warrantyTime = null;
+    protected ?float $cost            = null;
+    protected ?string $description    = null;
+    protected ?string $ean            = null;
+    protected ?bool $main             = null;
     /** @var array<Price> */
     protected ?array $prices      = null;
     protected ?StatusEnum $status = null;
@@ -50,11 +49,11 @@ class Variation extends AbstractModel
         ServiceProviderInterface $serviceProvider,
         string $skuId,
         array $images,
-        Dimension $dimension,
-        UnitTime $handlingTime,
+        ?Dimension $dimension,
+        ?UnitTime $handlingTime,
         string $name,
         string $sku,
-        UnitTime $warrantyTime,
+        ?UnitTime $warrantyTime,
         ?float $cost = null,
         ?string $description = null,
         ?string $ean = null,
@@ -66,20 +65,33 @@ class Variation extends AbstractModel
     ) {
         $this->setSkuId($skuId);
 
-        foreach ($images as $key => $image) {
-            if (is_array($image)) {
-                $images[$key] = $serviceProvider->create(
-                    Image::class,
-                    $image
-                );
-            }
+        $resolved = $this->hydrate(
+            $serviceProvider,
+            [
+                'images'               => $images,
+                'prices'               => $prices,
+                'stocks'               => $stocks,
+                'variantSpecification' => $variantSpecification,
+            ],
+            [
+                'images'               => [Image::class],
+                'prices'               => [Price::class],
+                'stocks'               => [Stock::class],
+                'variantSpecification' => [AttributeValue::class],
+            ]
+        );
+        $this->setImages($resolved['images']);
+        if ($dimension !== null) {
+            $this->setDimension($dimension);
         }
-        $this->setImages($images);
-        $this->setDimension($dimension);
-        $this->setHandlingTime($handlingTime);
+        if ($handlingTime !== null) {
+            $this->setHandlingTime($handlingTime);
+        }
         $this->setName($name);
         $this->setSku($sku);
-        $this->setWarrantyTime($warrantyTime);
+        if ($warrantyTime !== null) {
+            $this->setWarrantyTime($warrantyTime);
+        }
         if ($cost !== null) {
             $this->setCost($cost);
         }
@@ -90,16 +102,8 @@ class Variation extends AbstractModel
             $this->setEan($ean);
         }
         $this->setMain($main);
-        if ($prices !== null) {
-            foreach ($prices as $key => $price) {
-                if (is_array($price)) {
-                    $prices[$key] = $serviceProvider->create(
-                        Price::class,
-                        $price
-                    );
-                }
-            }
-            $this->setPrices($prices);
+        if ($resolved['prices'] !== null) {
+            $this->setPrices($resolved['prices']);
         }
 
         if ($status !== null) {
@@ -109,28 +113,12 @@ class Variation extends AbstractModel
             $this->setStatus($status);
         }
 
-        if ($stocks !== null) {
-            foreach ($stocks as $key => $stock) {
-                if (is_array($stock)) {
-                    $stocks[$key] = $serviceProvider->create(
-                        Stock::class,
-                        $stock
-                    );
-                }
-            }
-            $this->setStocks($stocks);
+        if ($resolved['stocks'] !== null) {
+            $this->setStocks($resolved['stocks']);
         }
 
-        if ($variantSpecification !== null) {
-            foreach ($variantSpecification as $key => $attributeValue) {
-                if (is_array($attributeValue)) {
-                    $variantSpecification[$key] = $serviceProvider->create(
-                        AttributeValue::class,
-                        $attributeValue
-                    );
-                }
-            }
-            $this->setVariantSpecification($variantSpecification);
+        if ($resolved['variantSpecification'] !== null) {
+            $this->setVariantSpecification($resolved['variantSpecification']);
         }
     }
 
@@ -163,23 +151,23 @@ class Variation extends AbstractModel
         return $this;
     }
 
-    public function getDimension(): Dimension
+    public function getDimension(): ?Dimension
     {
         return $this->dimension;
     }
 
-    public function setDimension(Dimension $dimension): self
+    public function setDimension(?Dimension $dimension): self
     {
         $this->dimension = $dimension;
         return $this;
     }
 
-    public function getHandlingTime(): UnitTime
+    public function getHandlingTime(): ?UnitTime
     {
         return $this->handlingTime;
     }
 
-    public function setHandlingTime(UnitTime $handlingTime): self
+    public function setHandlingTime(?UnitTime $handlingTime): self
     {
         $this->handlingTime = $handlingTime;
         return $this;
@@ -207,12 +195,12 @@ class Variation extends AbstractModel
         return $this;
     }
 
-    public function getWarrantyTime(): UnitTime
+    public function getWarrantyTime(): ?UnitTime
     {
         return $this->warrantyTime;
     }
 
-    public function setWarrantyTime(UnitTime $warrantyTime): self
+    public function setWarrantyTime(?UnitTime $warrantyTime): self
     {
         $this->warrantyTime = $warrantyTime;
         return $this;
