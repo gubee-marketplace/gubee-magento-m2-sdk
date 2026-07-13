@@ -45,7 +45,7 @@ class AttributeGroupResource extends AbstractResource
         );
     }
 
-    public function listAllAttributeGroups($pageable): PagedResult
+    public function listAllAttributeGroups(mixed $pageable): PagedResult
     {
         $query = [
             'pageable' => $pageable,

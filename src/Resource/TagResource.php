@@ -125,7 +125,7 @@ class TagResource extends AbstractResource
         );
     }
 
-    public function searchPendingTagsOfOrdersPageable(string $platform, ?string $startDt, ?string $endDt, ?string $searchText, ?array $accountIds, ?string $dateFilterType, $pageable): PagedResult
+    public function searchPendingTagsOfOrdersPageable(string $platform, ?string $startDt, ?string $endDt, ?string $searchText, ?array $accountIds, ?string $dateFilterType, mixed $pageable): PagedResult
     {
         $query = [
             'startDt'        => $startDt,
