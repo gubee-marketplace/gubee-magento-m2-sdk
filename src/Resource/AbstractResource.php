@@ -6,8 +6,12 @@ namespace Gubee\SDK\Resource;
 
 use finfo;
 use Gubee\SDK\Client;
+use Gubee\SDK\Model\Common\PagedResult;
+use Gubee\SDK\Model\Common\PageMetadata;
+use Gubee\SDK\Model\Common\ScrollResult;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use RuntimeException;
 
@@ -16,7 +20,6 @@ use function array_keys;
 use function array_map;
 use function array_merge;
 use function basename;
-use function class_exists;
 use function count;
 use function fopen;
 use function func_get_args;
@@ -24,6 +27,7 @@ use function implode;
 use function is_array;
 use function json_decode;
 use function json_encode;
+use function json_last_error;
 use function ltrim;
 use function range;
 use function rawurlencode;
@@ -31,8 +35,10 @@ use function restore_error_handler;
 use function rtrim;
 use function set_error_handler;
 use function sprintf;
+use function strpos;
 
 use const FILEINFO_MIME_TYPE;
+use const JSON_ERROR_NONE;
 
 abstract class AbstractResource
 {
@@ -60,13 +66,13 @@ abstract class AbstractResource
         string $uri,
         array $params = [],
         array $headers = []
-    ): array {
+    ) {
         $response = $this->client->getHttpClient()
             ->get(
                 self::prepareUri($uri, $params),
                 $headers
             );
-        return json_decode((string) $response->getBody(), true);
+        return self::decodeResponseBody($response);
     }
 
     /**
@@ -82,7 +88,7 @@ abstract class AbstractResource
      */
     protected function post(
         string $uri,
-        array $params = [],
+        $params = [],
         array $headers = [],
         array $files = [],
         array $uriParams = []
@@ -105,7 +111,7 @@ abstract class AbstractResource
             $body
         );
 
-        return json_decode((string) $response->getBody(), true);
+        return self::decodeResponseBody($response);
     }
 
     /**
@@ -123,7 +129,7 @@ abstract class AbstractResource
      */
     protected function put(
         string $uri,
-        array $params = [],
+        $params = [],
         array $headers = [],
         array $files = []
     ) {
@@ -146,10 +152,7 @@ abstract class AbstractResource
                 $body ?: ''
             );
 
-        return json_decode(
-            (string) $response->getBody(),
-            true
-        );
+        return self::decodeResponseBody($response);
     }
 
     /**
@@ -165,7 +168,7 @@ abstract class AbstractResource
      */
     protected function patch(
         string $uri,
-        array $params = [],
+        $params = [],
         array $headers = [],
         array $files = []
     ) {
@@ -200,10 +203,7 @@ abstract class AbstractResource
                 $body ?? ''
             );
 
-        return json_decode(
-            (string) $response->getBody(),
-            true
-        );
+        return self::decodeResponseBody($response);
     }
 
     /**
@@ -275,7 +275,7 @@ abstract class AbstractResource
         }
 
         $response = $this->client->getHttpClient()->sendRequest($request);
-        return json_decode((string) $response->getBody(), true);
+        return self::decodeResponseBody($response);
     }
 
     /**
@@ -290,7 +290,7 @@ abstract class AbstractResource
      */
     protected function delete(
         string $uri,
-        array $params = [],
+        $params = [],
         array $headers = []
     ) {
         $body = self::prepareJsonBody($params);
@@ -305,10 +305,28 @@ abstract class AbstractResource
             $body ?? ''
         );
 
-        return json_decode(
-            (string) $response->getBody(),
-            true
-        );
+        return self::decodeResponseBody($response);
+    }
+
+    /**
+     * @return mixed
+     */
+    private static function decodeResponseBody(ResponseInterface $response)
+    {
+        $body = (string) $response->getBody();
+        if ($body === '') {
+            return [];
+        }
+
+        $contentType = $response->getHeaderLine('Content-Type');
+        if ($contentType === '' || false !== strpos($contentType, 'json')) {
+            $decoded = json_decode($body, true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return $decoded;
+            }
+        }
+
+        return $body;
     }
 
     /**
@@ -429,8 +447,12 @@ abstract class AbstractResource
      * @return string|null The JSON-encoded string of the filtered parameters
      * array, or null if the array is empty.
      */
-    private static function prepareJsonBody(array $params): ?string
+    private static function prepareJsonBody($params): ?string
     {
+        if (! is_array($params)) {
+            return json_encode($params);
+        }
+
         $params = array_filter(
             $params,
             function ($value): bool {
@@ -506,10 +528,6 @@ abstract class AbstractResource
      */
     private static function guessFileContentType(string $file): string
     {
-        if (! class_exists(finfo::class, false)) {
-            return 'application/octet-stream';
-        }
-
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $type  = $finfo->file($file);
 
@@ -556,5 +574,111 @@ abstract class AbstractResource
     public function getClient(): Client
     {
         return $this->client;
+    }
+
+    /**
+     * @param class-string $modelClass
+     * @param array<mixed, mixed> $response
+     * @return mixed
+     */
+    protected function hydrateModel(string $modelClass, array $response)
+    {
+        return $this->getClient()->getServiceProvider()->create($modelClass, $response);
+    }
+
+    /**
+     * @param class-string $modelClass
+     * @param array<mixed, mixed> $response
+     * @param array<string, mixed> $extraArguments
+     * @return array<mixed, mixed>
+     */
+    protected function hydrateCollection(string $modelClass, array $response, array $extraArguments = []): array
+    {
+        foreach ($response as $key => $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $response[$key] = $this->hydrateModel(
+                $modelClass,
+                array_merge($item, $extraArguments)
+            );
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param class-string $modelClass
+     * @param array<string, mixed> $response
+     * @param array<string, mixed> $extraArguments
+     * @param list<string> $embeddedKeys
+     */
+    protected function hydratePagedResult(
+        string $modelClass,
+        array $response,
+        array $extraArguments = [],
+        array $embeddedKeys = []
+    ): PagedResult {
+        $items = $response;
+        if (! self::isList($response)) {
+            $items    = [];
+            $embedded = $response['_embedded'] ?? [];
+            if (is_array($embedded)) {
+                $keys = $embeddedKeys !== [] ? $embeddedKeys : array_keys($embedded);
+                foreach ($keys as $key) {
+                    if (isset($embedded[$key]) && is_array($embedded[$key])) {
+                        $items = $embedded[$key];
+                        break;
+                    }
+                }
+
+                if ($items === []) {
+                    foreach ($embedded as $embeddedItems) {
+                        if (is_array($embeddedItems)) {
+                            $items = $embeddedItems;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return new PagedResult(
+            $this->hydrateCollection($modelClass, $items, $extraArguments),
+            isset($response['page']) && is_array($response['page'])
+                ? new PageMetadata(
+                    isset($response['page']['size']) ? (int) $response['page']['size'] : null,
+                    isset($response['page']['totalElements']) ? (int) $response['page']['totalElements'] : null,
+                    isset($response['page']['totalPages']) ? (int) $response['page']['totalPages'] : null,
+                    isset($response['page']['number']) ? (int) $response['page']['number'] : null
+                )
+                : null,
+            isset($response['_links']) && is_array($response['_links'])
+                ? $response['_links']
+                : null
+        );
+    }
+
+    /**
+     * @param class-string $modelClass
+     * @param array<string, mixed> $response
+     * @param array<string, mixed> $extraArguments
+     */
+    protected function hydrateScrollResult(
+        string $modelClass,
+        array $response,
+        array $extraArguments = []
+    ): ScrollResult {
+        $items = isset($response['content']) && is_array($response['content'])
+            ? $response['content']
+            : [];
+
+        return new ScrollResult(
+            $this->hydrateCollection($modelClass, $items, $extraArguments),
+            isset($response['scrollId']) ? (string) $response['scrollId'] : null,
+            isset($response['pageSize']) ? (int) $response['pageSize'] : null,
+            isset($response['totalElements']) ? (int) $response['totalElements'] : null
+        );
     }
 }
