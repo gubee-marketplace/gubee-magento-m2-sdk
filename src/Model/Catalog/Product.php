@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace Gubee\SDK\Model\Catalog;
 
@@ -15,11 +15,18 @@ use Gubee\SDK\Model\Catalog\Product\Attribute\AttributeValue;
 use Gubee\SDK\Model\Catalog\Product\Attribute\Brand;
 use Gubee\SDK\Model\Catalog\Product\Variation;
 use Gubee\SDK\Model\Gubee\Account;
-use Gubee\SDK\Resource\Catalog\ProductResource;
 use Gubee\SDK\Resource\Catalog\Product\Attribute\BrandResource;
+use Gubee\SDK\Resource\Catalog\ProductResource;
 use Throwable;
 
-class Product extends AbstractModel {
+use function array_filter;
+use function array_values;
+use function is_array;
+use function is_string;
+use function sprintf;
+
+class Product extends AbstractModel
+{
     protected Brand $brand;
     protected string $id;
     protected Category $mainCategory;
@@ -28,8 +35,8 @@ class Product extends AbstractModel {
     protected StatusEnum $status;
     protected TypeEnum $type;
     protected ?string $hubeeId = null;
-    protected ?string $name = null;
-    protected ?string $nbm = null;
+    protected ?string $name    = null;
+    protected ?string $nbm     = null;
     /** @var array<Account>|null */
     protected ?array $accounts = null;
     /** @var array<Category>|null */
@@ -42,6 +49,7 @@ class Product extends AbstractModel {
     protected ?array $variations = null;
     protected BrandResource $brandResource;
     protected ProductResource $productResource;
+    protected ServiceProviderInterface $serviceProvider;
 
     /**
      * @param Brand|array<int|string, mixed> $brand
@@ -75,8 +83,9 @@ class Product extends AbstractModel {
         ?array $variantAttributes = null,
         ?array $variations = null
     ) {
+        $this->serviceProvider = $serviceProvider;
         $this->productResource = $productResource;
-        $this->brandResource = $brandResource;
+        $this->brandResource   = $brandResource;
         $this->setId($id)
             ->setMainCategory($mainCategory)
             ->setMainSku($mainSku);
@@ -85,13 +94,21 @@ class Product extends AbstractModel {
         }
         $this->setOrigin($origin);
         if ($brand) {
-            if (is_array($brand)) {
+            if (is_string($brand)) {
                 $brand = $serviceProvider->create(
                     Brand::class,
-                    $brand
+                    [
+                        'brandResource' => $brandResource,
+                        'name'          => $brand,
+                    ]
+                );
+            } elseif (is_array($brand)) {
+                $brand = $serviceProvider->create(
+                    Brand::class,
+                    $brand + ['brandResource' => $brandResource]
                 );
             }
-            $this->setBrand($brand);
+            $this->brand = $brand;
         }
         if (is_string($status)) {
             $status = StatusEnum::fromValue($status);
@@ -110,84 +127,89 @@ class Product extends AbstractModel {
         if ($nbm) {
             $this->setNbm($nbm);
         }
-        if ($accounts && is_array($accounts)) {
-            foreach ($accounts as $key => $accont) {
-                if (is_array($accont)) {
-                    $accounts[$key] = $serviceProvider->create(
-                        Account::class,
-                        $accont
-                    );
-                }
-            }
-            $this->setAccounts($accounts);
-        }
         if ($categories && is_array($categories)) {
             foreach ($categories as $key => $category) {
-                if (is_array($category)) {
-                    $categories[$key] = $serviceProvider->create(
-                        Category::class,
-                        $category
-                    );
+                if (is_string($category)) {
+                    $categories[$key] = [
+                        'serviceProvider' => $serviceProvider,
+                        'id'              => $category,
+                    ];
+                } elseif (is_array($category)) {
+                    $categories[$key] = $category + ['serviceProvider' => $serviceProvider];
                 }
             }
-            $this->setCategories($categories);
-        }
-        if ($specifications && is_array($specifications)) {
-            foreach ($specifications as $key => $specification) {
-                if (is_array($specification)) {
-                    $specifications[$key] = $serviceProvider->create(
-                        AttributeValue::class,
-                        $specification
-                    );
-                }
-            }
-            $this->setSpecifications($specifications);
         }
         if ($variantAttributes && is_array($variantAttributes)) {
             foreach ($variantAttributes as $key => $variantAttribute) {
-                if (is_array($variantAttribute)) {
-                    $variantAttributes[$key] = $serviceProvider->create(
-                        AttributeValue::class,
-                        $variantAttribute
-                    );
+                if (is_string($variantAttribute)) {
+                    $variantAttributes[$key] = ['attribute' => $variantAttribute];
                 }
             }
-            $this->setVariantAttributes($variantAttributes);
         }
         if ($variations && is_array($variations)) {
             foreach ($variations as $key => $variation) {
                 if (is_array($variation)) {
-                    $variations[$key] = $serviceProvider->create(
-                        AttributeValue::class,
-                        $variation
-                    );
+                    $variations[$key] = $variation + ['serviceProvider' => $serviceProvider];
                 }
             }
-            $this->setVariations($variations);
+        }
+        $resolved = $this->hydrate(
+            $serviceProvider,
+            [
+                'accounts'          => $accounts,
+                'categories'        => $categories,
+                'specifications'    => $specifications,
+                'variantAttributes' => $variantAttributes,
+                'variations'        => $variations,
+            ],
+            [
+                'accounts'          => [Account::class],
+                'categories'        => [Category::class],
+                'specifications'    => [AttributeValue::class],
+                'variantAttributes' => [AttributeValue::class],
+                'variations'        => [Variation::class],
+            ]
+        );
+        if ($resolved['accounts'] !== null) {
+            $this->setAccounts($resolved['accounts']);
+        }
+        if ($resolved['categories'] !== null) {
+            $this->setCategories($resolved['categories']);
+        }
+        if ($resolved['specifications'] !== null) {
+            $this->setSpecifications($resolved['specifications']);
+        }
+        if ($resolved['variantAttributes'] !== null) {
+            $this->setVariantAttributes($resolved['variantAttributes']);
+        }
+        if ($resolved['variations'] !== null) {
+            $this->setVariations($resolved['variations']);
         }
     }
 
-    public function load(string $id, string $field = 'externalId'): self {
+    public function load(string $id, string $field = 'externalId'): self
+    {
         switch ($field) {
-        case 'externalId':
-            $product = $this->productResource->loadById($id);
-            break;
-        case 'skuId':
-            $product = $this->productResource->getBySku($id);
-            break;
-        default:
-            throw new NotFoundException(
-                sprintf(
-                    'Field %s not found',
-                    $field
-                )
-            );
+            case 'externalId':
+                $product = $this->productResource->loadById($id);
+                break;
+            case 'skuId':
+                $product = $this->productResource->getBySku($id);
+                break;
+            default:
+                throw new NotFoundException(
+                    sprintf(
+                        'Field %s not found',
+                        $field
+                    )
+                );
         }
 
         return $product;
     }
 
-    public function save() {
+    public function save()
+    {
         try {
             $this->productResource->update(
                 $this->getId(),
@@ -195,19 +217,19 @@ class Product extends AbstractModel {
             );
         } catch (\Gubee\SDK\Library\HttpClient\Exception\NotFoundException $e) {
             return $this->productResource->create($this);
-        } catch (\Throwable $e) {
-            throw $e;
         }
 
         return $this;
     }
 
-    public function getBrand(): Brand {
+    public function getBrand(): Brand
+    {
         return $this->brand;
     }
 
-    public function setBrand(Brand $brand): self {
-        if (!$brand->getHubeeId()) {
+    public function setBrand(Brand $brand): self
+    {
+        if (! $brand->getHubeeId()) {
             try {
                 $brand = $this->brandResource->loadByName(
                     $brand->getName()
@@ -220,83 +242,110 @@ class Product extends AbstractModel {
         return $this;
     }
 
-    public function getId(): string {
+    public function getId(): string
+    {
         return $this->id;
     }
 
-    public function setId(string $id): self {
+    public function setId(string $id): self
+    {
         $this->id = $id;
         return $this;
     }
 
-    public function getMainCategory(): Category {
+    public function getMainCategory(): Category
+    {
         return $this->mainCategory;
     }
 
-    public function setMainCategory(Category $mainCategory): self {
+    public function setMainCategory($mainCategory): self
+    {
+        if (is_string($mainCategory)) {
+            $mainCategory = $this->serviceProvider->create(
+                Category::class,
+                [
+                    'serviceProvider' => $this->serviceProvider,
+                    'id'              => $mainCategory,
+                ]
+            );
+        }
         $this->mainCategory = $mainCategory;
         return $this;
     }
 
-    public function getMainSku(): string {
+    public function getMainSku(): string
+    {
         return $this->mainSku;
     }
 
-    public function setMainSku(string $mainSku): self {
+    public function setMainSku(string $mainSku): self
+    {
         $this->mainSku = $mainSku;
         return $this;
     }
 
-    public function getOrigin(): OriginEnum {
+    public function getOrigin(): OriginEnum
+    {
         return $this->origin;
     }
 
-    public function setOrigin(OriginEnum $origin): self {
+    public function setOrigin(OriginEnum $origin): self
+    {
         $this->origin = $origin;
         return $this;
     }
 
-    public function getStatus(): StatusEnum {
+    public function getStatus(): StatusEnum
+    {
         return $this->status;
     }
 
-    public function setStatus(StatusEnum $status): self {
+    public function setStatus(StatusEnum $status): self
+    {
         $this->status = $status;
         return $this;
     }
 
-    public function getType(): TypeEnum {
+    public function getType(): TypeEnum
+    {
         return $this->type;
     }
 
-    public function setType(TypeEnum $type): self {
+    public function setType(TypeEnum $type): self
+    {
         $this->type = $type;
         return $this;
     }
 
-    public function getHubeeId(): ?string {
+    public function getHubeeId(): ?string
+    {
         return $this->hubeeId;
     }
 
-    public function setHubeeId(?string $hubeeId): self {
+    public function setHubeeId(?string $hubeeId): self
+    {
         $this->hubeeId = $hubeeId;
         return $this;
     }
 
-    public function getName(): ?string {
+    public function getName(): ?string
+    {
         return $this->name;
     }
 
-    public function setName(?string $name): self {
+    public function setName(?string $name): self
+    {
         $this->name = $name;
         return $this;
     }
 
-    public function getNbm(): ?string {
+    public function getNbm(): ?string
+    {
         return $this->nbm;
     }
 
-    public function setNbm(?string $nbm): self {
+    public function setNbm(?string $nbm): self
+    {
         $this->nbm = $nbm;
         return $this;
     }
@@ -304,14 +353,16 @@ class Product extends AbstractModel {
     /**
      * @return array<Account>
      */
-    public function getAccounts(): ?array {
+    public function getAccounts(): ?array
+    {
         return $this->accounts;
     }
 
     /**
      * @param array<Account> $accounts
      */
-    public function setAccounts(array $accounts): self {
+    public function setAccounts(array $accounts): self
+    {
         $this->validateArrayElements(
             $accounts,
             Account::class
@@ -323,14 +374,16 @@ class Product extends AbstractModel {
     /**
      * @return array<Category>
      */
-    public function getCategories(): ?array {
+    public function getCategories(): ?array
+    {
         return $this->categories;
     }
 
     /**
      * @param array<Category> $categories
      */
-    public function setCategories(array $categories): self {
+    public function setCategories(array $categories): self
+    {
         $this->validateArrayElements($categories, Category::class);
         $this->categories = $categories;
         return $this;
@@ -339,14 +392,16 @@ class Product extends AbstractModel {
     /**
      * @return array<AttributeValue>
      */
-    public function getSpecifications(): ?array {
+    public function getSpecifications(): ?array
+    {
         return $this->specifications;
     }
 
     /**
      * @param  array<AttributeValue> $specifications
      */
-    public function setSpecifications(array $specifications): self {
+    public function setSpecifications(array $specifications): self
+    {
         $this->validateArrayElements($specifications, AttributeValue::class);
         $this->specifications = $specifications;
         return $this;
@@ -355,14 +410,16 @@ class Product extends AbstractModel {
     /**
      * @return  array<AttributeValue>
      */
-    public function getVariantAttributes(): ?array {
+    public function getVariantAttributes(): ?array
+    {
         return $this->variantAttributes;
     }
 
     /**
      * @param  array<AttributeValue> $variantAttributes
      */
-    public function setVariantAttributes(array $variantAttributes): self {
+    public function setVariantAttributes(array $variantAttributes): self
+    {
         $this->validateArrayElements($variantAttributes, AttributeValue::class);
         $this->variantAttributes = $variantAttributes;
         return $this;
@@ -371,27 +428,32 @@ class Product extends AbstractModel {
     /**
      * @return array<Variation>
      */
-    public function getVariations(): ?array {
+    public function getVariations(): ?array
+    {
         return $this->variations;
     }
 
     /**
      * @param array<Variation> $variations
      */
-    public function setVariations(?array $variations): self {
+    public function setVariations(?array $variations): self
+    {
         $this->validateArrayElements($variations, Variation::class);
         $this->variations = $variations;
         return $this;
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         $values = parent::jsonSerialize();
-        foreach ($values['categories'] as $key => $category) {
-            $values['categories'][] = $category->getId();
+        if (isset($values['categories'])) {
+            foreach ($values['categories'] as $key => $category) {
+                $values['categories'][] = $category->getId();
 
-            unset($values['categories'][$key]);
+                unset($values['categories'][$key]);
+            }
+            $values['categories'] = array_values($values['categories']);
         }
-        $values['categories'] = array_values($values['categories']);
         $values['mainCategory'] = $values['mainCategory']->getId();
         if (isset($values['brand'])) {
             $values['brand'] = $values['brand']->getId();
@@ -409,12 +471,14 @@ class Product extends AbstractModel {
         if (isset($values['brandResource'])) {
             unset($values['brandResource']);
         }
-        $values = array_filter(
+        if (isset($values['serviceProvider'])) {
+            unset($values['serviceProvider']);
+        }
+        return array_filter(
             $values,
             function ($value) {
                 return $value !== null;
             }
         );
-        return $values;
     }
 }
