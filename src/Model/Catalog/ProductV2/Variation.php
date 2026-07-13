@@ -25,7 +25,7 @@ class Variation extends AbstractModel
     protected ConditionEnum $condition;
     protected StatusEnum $status;
     protected string $warrantyTime;
-    protected float $cost;
+    protected Cost $cost;
     protected Dimension $dimension;
     /** @var array<Price> */
     protected array $prices;
@@ -41,7 +41,7 @@ class Variation extends AbstractModel
      * @param array<Stock|array<mixed>> $stocks
      * @param array<Image|array<mixed>> $images
      * @param array<AttributeValue|array<mixed>> $variantSpecification
-     * @param float $cost
+     * @param Cost|array<string, mixed> $cost
      * @param ConditionEnum|string $condition
      * @param StatusEnum|string $status
      */
@@ -53,7 +53,7 @@ class Variation extends AbstractModel
         $condition,
         $status,
         string $warrantyTime,
-        float $cost,
+        $cost,
         Dimension $dimension,
         array $prices,
         array $stocks,
@@ -78,6 +78,9 @@ class Variation extends AbstractModel
 
         $this->warrantyTime = $warrantyTime;
 
+        if (is_array($cost)) {
+            $cost = $serviceProvider->create(Cost::class, $cost);
+        }
         $this->cost = $cost;
 
         $this->dimension = $dimension;
@@ -209,12 +212,12 @@ class Variation extends AbstractModel
         return $this;
     }
 
-    public function getCost(): float
+    public function getCost(): Cost
     {
         return $this->cost;
     }
 
-    public function setCost(float $cost): self
+    public function setCost(Cost $cost): self
     {
         $this->cost = $cost;
         return $this;
