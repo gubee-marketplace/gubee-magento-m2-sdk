@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.0",
         "php-di/php-di": "^6.4",
         "php-http/client-common": "^2.7",
         "php-http/discovery": "*",
@@ -41,7 +41,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.4.33"
+            "php": "8.0.0"
         },
         "optimize-autoloader": true,
         "sort-packages": true,
@@ -70,7 +70,7 @@
             "@cs:stan"
         ],
         "cs:check": "php -d error_reporting=8191 vendor/bin/phpcs",
-        "cs:compat": "php -d error_reporting=8191 vendor/bin/phpcs --standard=PHPCompatibility --runtime-set testVersion 7.4- src test",
+        "cs:compat": "php -d error_reporting=8191 vendor/bin/phpcs --standard=PHPCompatibility --runtime-set testVersion 8.0- src test",
         "cs:fix": "php -d error_reporting=8191 vendor/bin/phpcbf",
         "cs:stan": "vendor/bin/phpstan analyse src test --level=6",
         "rector": "vendor/bin/rector process",
