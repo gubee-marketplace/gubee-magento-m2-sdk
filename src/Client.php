@@ -54,7 +54,11 @@ class Client
         $this->httpClientBuilder->addPlugin(
             new RetryPlugin([
                 'retries'           => $retryCount,
-                'exception_decider' => fn(RequestInterface $request, Throwable $exception) => $this->shouldRetry($request, $exception),
+                'exception_decider' => function (RequestInterface $request, Throwable $exception): bool {
+                    unset($request);
+
+                    return $this->shouldRetry($exception);
+                },
             ])
         );
 
@@ -69,7 +73,7 @@ class Client
         $this->setUrl(self::BASE_URI);
     }
 
-    private function shouldRetry(RequestInterface $request, Throwable $exception): bool
+    private function shouldRetry(Throwable $exception): bool
     {
         /**
          * The list of HTTP status codes that should trigger a retry.
