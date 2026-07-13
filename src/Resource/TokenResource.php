@@ -10,17 +10,16 @@ class TokenResource extends AbstractResource
 {
     public function revalidate(string $token): Token
     {
-        $response = $this->postForm(
+        $response = $this->post(
             '/integration/tokens/revalidate/apitoken',
             $token,
-            [],
             [
                 'Content-Type' => 'application/json',
                 'Accept'       => 'application/hal+json',
             ]
         );
 
-        return $this->client->getServiceProvider()->create(
+        return $this->hydrateModel(
             Token::class,
             $response
         );

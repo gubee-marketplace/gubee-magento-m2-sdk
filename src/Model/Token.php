@@ -38,11 +38,12 @@ class Token extends AbstractModel
         $this->token     = $token;
         $this->tokenType = $tokenType;
         if (! $validity instanceof DateTimeInterface) {
-            $this->validity = DateTime::createFromFormat(
+            $validity = DateTime::createFromFormat(
                 'Y-m-d\TH:i:s.v',
                 $validity
             );
         }
+        $this->validity = $validity;
     }
 
     public function getId(): string
@@ -120,7 +121,6 @@ class Token extends AbstractModel
      * Set the validity of the token.
      *
      * @param string|DateTimeInterface $validity
-     * @return Token
      */
     public function setValidity($validity): self
     {

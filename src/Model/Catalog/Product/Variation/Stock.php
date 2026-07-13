@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace Gubee\SDK\Model\Catalog\Product\Variation;
 
@@ -9,12 +9,13 @@ use Gubee\SDK\Model\AbstractModel;
 use Gubee\SDK\Model\Catalog\Product\Attribute\Dimension\UnitTime;
 use Gubee\SDK\Resource\Catalog\Product\Variation\StockResource;
 
-class Stock extends AbstractModel {
+class Stock extends AbstractModel
+{
     protected UnitTime $crossDockingTime;
-    protected int $priority = 0;
-    protected int $qty = 0;
+    protected int $priority        = 0;
+    protected int $qty             = 0;
     protected ?string $warehouseId = null;
-    protected ?string $sku = null;
+    protected ?string $sku         = null;
 
     protected StockResource $stockResource;
 
@@ -31,13 +32,12 @@ class Stock extends AbstractModel {
         ?string $sku = null
     ) {
         $this->stockResource = $stockResource;
-        if (is_array($crossDockingTime)) {
-            $crossDockingTime = $serviceProvider->create(
-                UnitTime::class,
-                $crossDockingTime
-            );
-        }
-        $this->setCrossDockingTime($crossDockingTime);
+        $resolved            = $this->hydrate(
+            $serviceProvider,
+            ['crossDockingTime' => $crossDockingTime],
+            ['crossDockingTime' => UnitTime::class]
+        );
+        $this->setCrossDockingTime($resolved['crossDockingTime']);
         $this->setPriority($priority);
         $this->setQty($qty);
         if ($warehouseId) {
@@ -48,7 +48,8 @@ class Stock extends AbstractModel {
         }
     }
 
-    public function save(string $productId, string $skuId): self {
+    public function save(string $productId, string $skuId): self
+    {
         $this->stockResource->updateStock(
             $productId,
             $skuId,
@@ -58,43 +59,52 @@ class Stock extends AbstractModel {
         return $this;
     }
 
-    public function getCrossDockingTime(): UnitTime {
+    public function getCrossDockingTime(): UnitTime
+    {
         return $this->crossDockingTime;
     }
 
-    public function setCrossDockingTime(UnitTime $crossDockingTime): self {
+    public function setCrossDockingTime(UnitTime $crossDockingTime): self
+    {
         $this->crossDockingTime = $crossDockingTime;
         return $this;
     }
 
-    public function getPriority(): int {
+    public function getPriority(): int
+    {
         return $this->priority;
     }
 
-    public function setPriority(int $priority): self {
+    public function setPriority(int $priority): self
+    {
         $this->priority = $priority;
         return $this;
     }
 
-    public function getQty(): int {
+    public function getQty(): int
+    {
         return $this->qty;
     }
 
-    public function setQty(int $qty): self {
+    public function setQty(int $qty): self
+    {
         $this->qty = $qty;
         return $this;
     }
 
-    public function getWarehouseId(): string {
+    public function getWarehouseId(): string
+    {
         return $this->warehouseId;
     }
 
-    public function setWarehouseId(string $warehouseId): self {
+    public function setWarehouseId(string $warehouseId): self
+    {
         $this->warehouseId = $warehouseId;
         return $this;
     }
 
-    public function jsonSerialize(): array {
+    public function jsonSerialize(): array
+    {
         $values = parent::jsonSerialize();
         if (isset($values['stockResource'])) {
             unset($values['stockResource']);
@@ -103,11 +113,13 @@ class Stock extends AbstractModel {
         return $values;
     }
 
-    public function getSku(): ?string {
+    public function getSku(): ?string
+    {
         return $this->sku;
     }
 
-    public function setSku(?string $sku): self {
+    public function setSku(?string $sku): self
+    {
         $this->sku = $sku;
         return $this;
     }

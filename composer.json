@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^7.3|^7.4|^8.0|^8.1|^8.2",
+        "php": "^8.0",
         "php-di/php-di": "^6.4",
         "php-http/client-common": "^2.7",
         "php-http/discovery": "*",
@@ -40,6 +40,9 @@
         }
     },
     "config": {
+        "platform": {
+            "php": "8.0.0"
+        },
         "optimize-autoloader": true,
         "sort-packages": true,
         "allow-plugins": {
@@ -51,22 +54,27 @@
         "fakerphp/faker": "^1.23",
         "guzzlehttp/guzzle": "^7.8",
         "laminas/laminas-coding-standard": "^2.5",
+        "league/openapi-psr7-validator": "^0.24",
         "monolog/monolog": "^2.9",
-        "pact-foundation/pact-php": "^8.1",
         "php-http/curl-client": "^2.3",
         "php-http/mock-client": "^1.6",
         "phpcompatibility/php-compatibility": "^9.3",
-        "phpstan/phpstan": "^1.10",
-        "phpunit/phpunit": "^9.6"
+        "phpstan/phpstan": "^2.2",
+        "phpunit/phpunit": "^9.6",
+        "rector/rector": "^2.5"
     },
     "scripts": {
         "cs": [
             "@cs:check",
+            "@cs:compat",
             "@cs:stan"
         ],
-        "cs:check": "phpcs",
-        "cs:fix": "phpcbf",
+        "cs:check": "php -d error_reporting=8191 vendor/bin/phpcs",
+        "cs:compat": "php -d error_reporting=8191 vendor/bin/phpcs --standard=PHPCompatibility --runtime-set testVersion 8.0- src test",
+        "cs:fix": "php -d error_reporting=8191 vendor/bin/phpcbf",
         "cs:stan": "vendor/bin/phpstan analyse src test --level=6",
+        "rector": "vendor/bin/rector process",
+        "rector:dry-run": "vendor/bin/rector process --dry-run",
         "test": [
             "@test:unit",
             "@test:integration"

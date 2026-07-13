@@ -1,18 +1,26 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace Gubee\SDK\Resource\Catalog\Product\Variation;
 
 use Gubee\SDK\Model\Catalog\Product\Variation\Stock;
+use Gubee\SDK\Model\Catalog\Product\Variation\StockIntegrationPayload;
+use Gubee\SDK\Model\Catalog\Product\Variation\StockQuery;
+use Gubee\SDK\Model\Common\EmptyResult;
 use Gubee\SDK\Resource\AbstractResource;
+use JsonSerializable;
 
-class StockResource extends AbstractResource {
-    public function load(string $itemId, string $warehouseId): Stock {
+use function array_merge;
+use function rawurlencode;
+
+class StockResource extends AbstractResource
+{
+    public function load(string $itemId, string $warehouseId): Stock
+    {
         $response = $this->get(
             '/integration/stocks/' . rawurlencode($itemId) . '/' . rawurlencode($warehouseId)
         );
-
 
         return $this->getClient()->getServiceProvider()
             ->create(
@@ -24,7 +32,8 @@ class StockResource extends AbstractResource {
             );
     }
 
-    public function getStockByPlatform(string $platform, string $itemId, string $warehouseId): Stock {
+    public function getStockByPlatform(string $platform, string $itemId, string $warehouseId): Stock
+    {
         $response = $this->get(
             '/integration/stocks/' . rawurlencode($platform) . '/' . rawurlencode($itemId) . '/' . rawurlencode($warehouseId)
         );
@@ -39,14 +48,18 @@ class StockResource extends AbstractResource {
             );
     }
 
-    public function updateStock(string $productId, string $skuId, Stock $stock) {
-        return $this->put(
+    public function updateStock(string $productId, string $skuId, Stock $stock): EmptyResult
+    {
+        $this->put(
             '/integration/stocks/' . rawurlencode($productId) . '/' . rawurlencode($skuId),
             $stock->jsonSerialize()
         );
+
+        return $this->hydrateModel(EmptyResult::class, []);
     }
 
-    public function getAllStockByPlatform(string $platform, string $itemId): Stock {
+    public function getAllStockByPlatform(string $platform, string $itemId): Stock
+    {
         $response = $this->get(
             '/integration/stocks/all/' . rawurlencode($platform) . '/' . rawurlencode($itemId)
         );
@@ -61,7 +74,8 @@ class StockResource extends AbstractResource {
             );
     }
 
-    public function getStockById(string $id): Stock {
+    public function getStockById(string $id): Stock
+    {
         $response = $this->get(
             '/integration/stocks/ids/' . rawurlencode($id)
         );
@@ -76,7 +90,8 @@ class StockResource extends AbstractResource {
             );
     }
 
-    public function getStockByIdAndPlatform(string $id, string $platform): Stock {
+    public function getStockByIdAndPlatform(string $id, string $platform): Stock
+    {
         $response = $this->get(
             '/integration/stocks/ids/' . rawurlencode($id) . '/platforms/' . rawurlencode($platform)
         );
@@ -91,10 +106,29 @@ class StockResource extends AbstractResource {
             );
     }
 
-    public function updateStockBySku(Stock $stock) {
-        return $this->put(
-            '/integration/stocks/bysku/',
-            $stock->jsonSerialize()
+    public function updateStockBySku(Stock|array $payload): EmptyResult
+    {
+        $this->put("/integration/stocks/bysku", $payload instanceof JsonSerializable ? $payload->jsonSerialize() : $payload);
+        return $this->hydrateModel(EmptyResult::class, []);
+    }
+
+    public function updateStockV2(StockIntegrationPayload|array $payload): EmptyResult
+    {
+        $this->put("/integration/stocks/v2", $payload instanceof JsonSerializable ? $payload->jsonSerialize() : $payload);
+        return $this->hydrateModel(EmptyResult::class, []);
+    }
+
+    public function getStockBySku(string $sku): array
+    {
+        $query = [
+            'sku' => $sku,
+        ];
+
+        $response = $this->get("/integration/stocks/bysku", $query);
+
+        return $this->hydrateCollection(
+            StockQuery::class,
+            $response
         );
     }
 }

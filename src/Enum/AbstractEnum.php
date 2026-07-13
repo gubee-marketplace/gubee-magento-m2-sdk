@@ -7,6 +7,7 @@ namespace Gubee\SDK\Enum;
 use InvalidArgumentException;
 use JsonSerializable;
 use ReflectionClass;
+use ReturnTypeWillChange;
 use Stringable;
 
 use function in_array;
@@ -42,7 +43,7 @@ abstract class AbstractEnum implements Stringable, JsonSerializable
      */
     public function __toString()
     {
-        return (string) $this->value;
+        return $this->value;
     }
 
     /**
@@ -55,7 +56,7 @@ abstract class AbstractEnum implements Stringable, JsonSerializable
     /**
      * @return string
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value;
