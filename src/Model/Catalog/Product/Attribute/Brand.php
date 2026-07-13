@@ -38,8 +38,8 @@ class Brand extends AbstractModel
     }
 
     public function load(
-        $id,
-        $field = 'name'
+        string $id,
+        string $field = 'name'
     ): Brand {
         switch ($field) {
             case 'name':

@@ -23,9 +23,6 @@ class Category extends AbstractModel
     protected CategoryResource $categoryResource;
     protected ServiceProviderInterface $serviceProvider;
 
-    /**
-     * @var int|Category $parent
-     */
     public function __construct(
         ServiceProviderInterface $serviceProvider,
         CategoryResource $categoryResource,
@@ -35,7 +32,7 @@ class Category extends AbstractModel
         ?string $description = null,
         ?bool $enabledAutoIntegration = null,
         ?string $hubeeId = null,
-        $parent = null
+        Category|int|null $parent = null
     ) {
         $this->serviceProvider  = $serviceProvider;
         $this->categoryResource = $categoryResource;
@@ -70,7 +67,7 @@ class Category extends AbstractModel
         }
     }
 
-    public function load(string $id)
+    public function load(string $id): Category
     {
         return $this->categoryResource->loadByExternalId($id);
     }
@@ -146,7 +143,7 @@ class Category extends AbstractModel
         return $this->parent;
     }
 
-    public function setParent($parent): self
+    public function setParent(Category|int $parent): self
     {
         if (is_int($parent)) {
             $parent = $this->serviceProvider->create(
@@ -154,7 +151,7 @@ class Category extends AbstractModel
                 [
                     'serviceProvider'  => $this->serviceProvider,
                     'categoryResource' => $this->categoryResource,
-                    'id'               => $parent,
+                    'id'               => (string) $parent,
                 ]
             );
         }

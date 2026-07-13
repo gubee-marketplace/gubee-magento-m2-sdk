@@ -1,0 +1,48 @@
+name: Contributors
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .github/assets/contributors.svg
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  contributors:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: repo-write-main
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure asset directory
+        run: mkdir -p .github/assets
+
+      - name: Generate contributors banner
+        uses: jaywcjlove/github-action-contributors@v2.1.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          filter-author: '(renovate\[bot\]|renovate-bot|dependabot\[bot\]|github-actions\[bot\])'
+          output: .github/assets/contributors.svg
+          avatarSize: 56
+
+      - name: Commit contributors banner
+        run: |
+          if git diff --quiet -- .github/assets/contributors.svg; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/assets/contributors.svg
+          git commit -m "📝 docs(contributors): atualiza banner de contributors"
+          git pull --rebase origin main
+          git push

@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Gubee\SDK\Resource\Catalog\Product\Attribute;
 
 use Gubee\SDK\Model\Catalog\Product\Attribute\Brand;
+use Gubee\SDK\Model\Common\EmptyResult;
+use Gubee\SDK\Model\Common\PagedResult;
 use Gubee\SDK\Resource\AbstractResource;
 use InvalidArgumentException;
+use JsonSerializable;
 
 use function array_merge;
 use function rawurlencode;
@@ -115,22 +118,21 @@ class BrandResource extends AbstractResource
             );
     }
 
-    public function loadByNameForm(string $name)
+    public function loadByNameForm(string $name): Brand
     {
         $response = $this->postForm(
             '/integration/brands/byName',
             $name
         );
-        return $this->client->getServiceProvider()
-            ->create(
-                Brand::class,
-                array_merge(
-                    $response,
-                    [
-                        'brandResource' => $this,
-                    ]
-                )
-            );
+        return $this->hydrateModel(
+            Brand::class,
+            array_merge(
+                $response,
+                [
+                    'brandResource' => $this,
+                ]
+            )
+        );
     }
 
     public function updateByName(Brand $brand, ?string $name = null): Brand
@@ -193,5 +195,59 @@ class BrandResource extends AbstractResource
                     ]
                 )
             );
+    }
+
+    public function updateBrandByName(Brand|array $payload): Brand
+    {
+        $response = $this->put("/integration/brands/v2/byName", $payload instanceof JsonSerializable ? $payload->jsonSerialize() : $payload);
+
+        return $this->hydrateModel(
+            Brand::class,
+            $response
+        );
+    }
+
+    public function updateBrandByName_1(string $name, Brand|array $payload): Brand
+    {
+        $query = [
+            'name' => $name,
+        ];
+
+        $response = $this->put(
+            $query === [] ? "/integration/brands/byName" : "/integration/brands/byName" . self::build($query),
+            $payload instanceof JsonSerializable ? $payload->jsonSerialize() : $payload
+        );
+
+        return $this->hydrateModel(
+            Brand::class,
+            $response
+        );
+    }
+
+    public function deleteBrandByExternalId(string $externalId): EmptyResult
+    {
+        $this->delete(
+            "/integration/brands/byExternalId/" . rawurlencode($externalId) . ""
+        );
+
+        return $this->hydrateModel(EmptyResult::class, []);
+    }
+
+    public function listAllBrands(mixed $pageable): PagedResult
+    {
+        $query = [
+            'pageable' => $pageable,
+        ];
+
+        $response = $this->get("/integration/brands/list/all", $query);
+
+        return $this->hydratePagedResult(
+            Brand::class,
+            $response,
+            [
+                'brandResource' => $this,
+            ],
+            ['brandApiDTOList']
+        );
     }
 }

@@ -1,0 +1,25 @@
+/vendor/
+
+# Composer
+# Libraries should not commit installed dependencies or a local lockfile snapshot.
+/composer.lock
+
+# Test, coverage, logs, and scratch output
+# This project writes reports, generated fixtures, and temporary files under var/.
+/var/
+
+# PHP tool caches
+/.phpcs-cache
+/.phpunit.result.cache
+
+# Editor and OS noise
+/.idea/
+/.vscode/
+/.DS_Store
+
+# Local AI/editor workspace files
+# Keep repo-specific automation prompts and personal handoff notes out of git.
+/.cursor/
+/AGENTS.md
+/CLAUDE.md
+/gubee-php-sdk-handoff-*.md

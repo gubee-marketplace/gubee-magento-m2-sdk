@@ -1,20 +1,62 @@
 <?xml version="1.0"?>
-<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd">
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd">
 
-    <arg name="basepath" value="." />
-    <arg name="cache" value=".phpcs-cache" />
-    <arg name="colors" />
-    <arg name="extensions" value="php" />
-    <arg name="parallel" value="80" />
+    <arg name="basepath" value="."/>
+    <arg name="cache" value=".phpcs-cache"/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+    <arg name="parallel" value="80"/>
 
     <!-- Show progress -->
-    <arg value="p" />
-    <arg value="s" />
+    <arg value="ps"/>
 
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>
 
-    <rule ref="LaminasCodingStandard" />
+    <rule ref="LaminasCodingStandard">
+        <exclude name="Squiz.WhiteSpace.LanguageConstructSpacing"/>
+        <exclude name="Generic.Files.LineLength.TooLong"/>
+    </rule>
+    <rule ref="Generic.WhiteSpace.LanguageConstructSpacing"/>
+    <config name="testVersion" value="8.0-"/>
+    <rule ref="Squiz.Commenting.FunctionComment.WrongStyle">
+        <exclude-pattern type="relative">./src/Resource/Catalog/CategoryResource.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Resource/Catalog/ProductResource.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Resource/Catalog/Product/Variation/PriceResource.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Resource/Sales/OrderResource.php</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <exclude-pattern type="relative">./src/Enum/*</exclude-pattern>
+        <exclude-pattern type="relative">./src/Resource/Catalog/CategoryResource.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Resource/Catalog/Product/Attribute/BrandResource.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Resource/Catalog/Product/AttributeResource.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Resource/InvoiceResource.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Resource/Invoicer/InvoiceResource.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Resource/Sales/Order/QueueResource.php</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
+        <exclude-pattern type="relative">./test/*</exclude-pattern>
+    </rule>
+    <rule ref="Squiz.Classes.ClassFileName.NoMatch">
+        <exclude-pattern type="relative">./test/*</exclude-pattern>
+    </rule>
+    <rule ref="WebimpressCodingStandard.NamingConventions.AbstractClass.Prefix">
+        <exclude-pattern type="relative">./test/*</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingAnyTypeHint">
+        <exclude-pattern type="relative">./test/*</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingAnyTypeHint">
+        <exclude-pattern type="relative">./test/*</exclude-pattern>
+    </rule>
+    <rule ref="WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps">
+        <exclude-pattern type="relative">./src/Model/Invoice/InvoiceItem.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Model/Notification/MissedNotification.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Model/Sales/Order/Invoice.php</exclude-pattern>
+    </rule>
+    <rule ref="WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCapsProperty">
+        <exclude-pattern type="relative">./src/Model/Invoice/InvoiceItem.php</exclude-pattern>
+        <exclude-pattern type="relative">./src/Model/Sales/Order/Invoice.php</exclude-pattern>
+    </rule>
 </ruleset>

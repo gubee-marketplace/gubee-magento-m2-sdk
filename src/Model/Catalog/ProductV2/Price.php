@@ -13,18 +13,21 @@ use function is_string;
 
 class Price extends AbstractModel
 {
-    protected float $value;
+    protected Cost $value;
     protected TypeEnum $type;
 
     /**
-     * @param float $value
+     * @param Cost|array<string, mixed> $value
      * @param TypeEnum|string $type
      */
     public function __construct(
         ServiceProviderInterface $serviceProvider,
-        float $value = 0.0,
+        $value,
         $type
     ) {
+        if (is_array($value)) {
+            $value = $serviceProvider->create(Cost::class, $value);
+        }
         if (is_string($type)) {
             $type = TypeEnum::fromValue($type);
         }
@@ -32,12 +35,12 @@ class Price extends AbstractModel
         $this->type  = $type;
     }
 
-    public function getValue(): float
+    public function getValue(): Cost
     {
         return $this->value;
     }
 
-    public function setValue(float $value): self
+    public function setValue(Cost $value): self
     {
         $this->value = $value;
         return $this;
