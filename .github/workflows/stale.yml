@@ -1,0 +1,38 @@
+name: Stale
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mark stale issues and pull requests
+        uses: actions/stale@v9
+        with:
+          days-before-stale: 45
+          days-before-close: 14
+          stale-issue-label: stale
+          stale-pr-label: stale
+          exempt-issue-labels: pinned,security,planned
+          exempt-pr-labels: pinned,security,work-in-progress
+          stale-issue-message: >
+            Esta issue ficou sem atividade recente. Marcação automática como stale.
+            Responda ou atualize o contexto para evitar fechamento automático.
+          stale-pr-message: >
+            Este pull request ficou sem atividade recente. Marcação automática como stale.
+            Atualize a branch ou responda aos comentários para evitar fechamento automático.
+          close-issue-message: >
+            Fechando automaticamente por inatividade prolongada.
+            Reabra se o problema continuar relevante com contexto atualizado.
+          close-pr-message: >
+            Fechando automaticamente por inatividade prolongada.
+            Reabra ou abra um novo PR quando o trabalho puder continuar.
+          operations-per-run: 200
