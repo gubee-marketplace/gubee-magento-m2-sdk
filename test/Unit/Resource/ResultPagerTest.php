@@ -18,7 +18,6 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use ReflectionMethod;
 use RuntimeException;
 use SebastianBergmann\ObjectEnumerator\InvalidArgumentException;
 
@@ -146,20 +145,11 @@ final class ResultPagerTest extends TestCase
         ResultPager::getPagination($response);
     }
 
-    public function testGetPaginationReturnsLinksAndGetHeaderCanBeReflected(): void
+    public function testGetPaginationReturnsLinks(): void
     {
-        $response = new Response(
-            200,
-            ['X-Test' => ['value']],
-            (string) json_encode(['_links' => ['next' => ['href' => 'https://example.test/api/items?page=1']]])
-        );
+        $response = new Response(200, [], (string) json_encode(['_links' => ['next' => ['href' => 'https://example.test/api/items?page=1']]]));
 
         self::assertSame(['next' => ['href' => 'https://example.test/api/items?page=1']], ResultPager::getPagination($response));
-
-        $method = new ReflectionMethod(ResultPager::class, 'getHeader');
-        $method->setAccessible(true);
-
-        self::assertSame('value', $method->invoke(null, $response, 'X-Test'));
     }
 
     public function testFetchNextThrowsWhenLinkedResponseIsNotAnArray(): void

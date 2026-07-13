@@ -234,16 +234,6 @@ class ResultPager
     }
 
     /**
-     * Get the value for a single header.
-     */
-    private static function getHeader(ResponseInterface $response, string $name): ?string
-    {
-        $headers = $response->getHeader($name);
-
-        return $headers[0] ?? null;
-    }
-
-    /**
      * @throws \Http\Client\Exception
      */
     private function get(string $key): array

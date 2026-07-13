@@ -139,7 +139,7 @@ class ClientTest extends TestCase
         $request   = new Request('GET', 'https://example.com/items');
         $exception = HttpException::create($request, new Response(429));
 
-        $this->assertTrue($this->invokeShouldRetry($request, $exception));
+        $this->assertTrue($this->invokeShouldRetry($exception));
     }
 
     public function testShouldRetryReturnsTrueForServerErrors(): void
@@ -147,7 +147,7 @@ class ClientTest extends TestCase
         $request   = new Request('GET', 'https://example.com/items');
         $exception = HttpException::create($request, new Response(500));
 
-        $this->assertTrue($this->invokeShouldRetry($request, $exception));
+        $this->assertTrue($this->invokeShouldRetry($exception));
     }
 
     public function testShouldRetryReturnsFalseForNonRetryableHttpError(): void
@@ -155,23 +155,21 @@ class ClientTest extends TestCase
         $request   = new Request('GET', 'https://example.com/items');
         $exception = HttpException::create($request, new Response(404));
 
-        $this->assertFalse($this->invokeShouldRetry($request, $exception));
+        $this->assertFalse($this->invokeShouldRetry($exception));
     }
 
     public function testShouldRetryReturnsFalseForNonHttpException(): void
     {
-        $request = new Request('GET', 'https://example.com/items');
-
-        $this->assertFalse($this->invokeShouldRetry($request, new RuntimeException('boom')));
+        $this->assertFalse($this->invokeShouldRetry(new RuntimeException('boom')));
     }
 
-    private function invokeShouldRetry(Request $request, Throwable $exception): bool
+    private function invokeShouldRetry(Throwable $exception): bool
     {
         $method = new ReflectionMethod($this->client, 'shouldRetry');
         $method->setAccessible(true);
 
         /** @var bool $result */
-        $result = $method->invoke($this->client, $request, $exception);
+        $result = $method->invoke($this->client, $exception);
 
         return $result;
     }

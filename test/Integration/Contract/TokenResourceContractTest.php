@@ -13,8 +13,6 @@ class TokenResourceContractTest extends ContractTestCase
     {
         $token = 'string';
 
-        $payloadData = 'string';
-
         $client = $this->newContractClient(404);
 
         $resource = new TokenResource($client);
