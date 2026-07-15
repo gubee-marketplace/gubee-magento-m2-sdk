@@ -116,7 +116,7 @@ class PriceResource extends AbstractResource {
     // Update prices by sku
     public function updatePricesBySku(string $sku, array $prices): void {
         $this->put(
-            '/integration/prices/bysku',
+            '/integration/prices/list/bysku',
             [
                 'sku' => $sku,
                 'prices' => $prices
