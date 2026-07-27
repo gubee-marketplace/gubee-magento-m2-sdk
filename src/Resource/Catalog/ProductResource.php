@@ -188,4 +188,14 @@ class ProductResource extends AbstractResource {
 
         return $response;
     }
+
+    public function patchStatus(string $productSku, string $status): void {
+        $this->patch(
+            '/integration/products/variations/status',
+            [
+                'sku' => $productSku,
+                'status' => $status
+            ]
+        );
+    }
 }
