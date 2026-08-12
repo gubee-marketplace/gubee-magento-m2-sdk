@@ -5,47 +5,53 @@
 
 ### Added
 
-- ✨ feat(tag): adiciona stack de tags [[6abbedd](https://github.com/macoaure/gubee-php-sdk/commit/6abbedd2fa895774b332de02994e192dd0453a80)]
-- ✨ feat(promotion): adiciona stack de promoções [[c22ada3](https://github.com/macoaure/gubee-php-sdk/commit/c22ada30b638de342a090c2790a766d568a0404e)]
-- ✨ feat(notification): adiciona stack de notificações [[e3a3244](https://github.com/macoaure/gubee-php-sdk/commit/e3a3244605599bc139a91426be3cd032e826b734)]
-- ✨ feat(media): adiciona stack de imagem e vídeo [[b661110](https://github.com/macoaure/gubee-php-sdk/commit/b661110bd59b6708296b4147aa4080be00e768e4)]
-- ✨ feat(shipping): adiciona stack de frete [[cc76658](https://github.com/macoaure/gubee-php-sdk/commit/cc76658261dc26daef9884ace816b5559b999dc8)]
-- ✨ feat(platform): adiciona stack de plataforma [[185dbe2](https://github.com/macoaure/gubee-php-sdk/commit/185dbe2d7d87bc756807d703bd7a90cd50afce11)]
-- ✨ feat(invoice): adiciona stack de invoice e invoicer [[3f87185](https://github.com/macoaure/gubee-php-sdk/commit/3f871850d3e74f27ec88e476921cd38966696fd3)]
-- ✨ feat(order): adiciona stack de pedidos e filas [[4725b83](https://github.com/macoaure/gubee-php-sdk/commit/4725b83b8ed46e6826891643299526968cab40dc)]
-- ✨ feat(ad): adiciona stack completa do recurso de anúncios [[047c0bd](https://github.com/macoaure/gubee-php-sdk/commit/047c0bd3ce96ccd2adae15fc6d50a86335cdaafa)]
-- ✨ feat(product): adiciona stack de produtos e variações [[8df5eb1](https://github.com/macoaure/gubee-php-sdk/commit/8df5eb17eb7eb6d6fbfb552ba399c49aef662bbd)]
-- ✨ feat(catalog): adiciona stack de categorias e atributos [[fc2a26f](https://github.com/macoaure/gubee-php-sdk/commit/fc2a26fa900b5decc214f6d723d21773b532f685)]
-- ✨ feat(token): adiciona stack completa do recurso de token [[b71dff0](https://github.com/macoaure/gubee-php-sdk/commit/b71dff0ae841c66dec17448019156e000b600bf8)]
-- ✨ feat(common): adiciona modelos e enums compartilhados [[9f160fe](https://github.com/macoaure/gubee-php-sdk/commit/9f160fe2cb0555cb896225c4ef628eb36e7abc46)]
+- ✨ feat(tag): adiciona stack de tags [[6abbedd](https://github.com/maco-studios/gubee-php-sdk/commit/6abbedd2fa895774b332de02994e192dd0453a80)]
+- ✨ feat(promotion): adiciona stack de promoções [[c22ada3](https://github.com/maco-studios/gubee-php-sdk/commit/c22ada30b638de342a090c2790a766d568a0404e)]
+- ✨ feat(notification): adiciona stack de notificações [[e3a3244](https://github.com/maco-studios/gubee-php-sdk/commit/e3a3244605599bc139a91426be3cd032e826b734)]
+- ✨ feat(media): adiciona stack de imagem e vídeo [[b661110](https://github.com/maco-studios/gubee-php-sdk/commit/b661110bd59b6708296b4147aa4080be00e768e4)]
+- ✨ feat(shipping): adiciona stack de frete [[cc76658](https://github.com/maco-studios/gubee-php-sdk/commit/cc76658261dc26daef9884ace816b5559b999dc8)]
+- ✨ feat(platform): adiciona stack de plataforma [[185dbe2](https://github.com/maco-studios/gubee-php-sdk/commit/185dbe2d7d87bc756807d703bd7a90cd50afce11)]
+- ✨ feat(invoice): adiciona stack de invoice e invoicer [[3f87185](https://github.com/maco-studios/gubee-php-sdk/commit/3f871850d3e74f27ec88e476921cd38966696fd3)]
+- ✨ feat(order): adiciona stack de pedidos e filas [[4725b83](https://github.com/maco-studios/gubee-php-sdk/commit/4725b83b8ed46e6826891643299526968cab40dc)]
+- ✨ feat(ad): adiciona stack completa do recurso de anúncios [[047c0bd](https://github.com/maco-studios/gubee-php-sdk/commit/047c0bd3ce96ccd2adae15fc6d50a86335cdaafa)]
+- ✨ feat(product): adiciona stack de produtos e variações [[8df5eb1](https://github.com/maco-studios/gubee-php-sdk/commit/8df5eb17eb7eb6d6fbfb552ba399c49aef662bbd)]
+- ✨ feat(catalog): adiciona stack de categorias e atributos [[fc2a26f](https://github.com/maco-studios/gubee-php-sdk/commit/fc2a26fa900b5decc214f6d723d21773b532f685)]
+- ✨ feat(token): adiciona stack completa do recurso de token [[b71dff0](https://github.com/maco-studios/gubee-php-sdk/commit/b71dff0ae841c66dec17448019156e000b600bf8)]
+- ✨ feat(common): adiciona modelos e enums compartilhados [[9f160fe](https://github.com/maco-studios/gubee-php-sdk/commit/9f160fe2cb0555cb896225c4ef628eb36e7abc46)]
 
 ### Changed
 
-- ♻️ refactor(core): ajusta tipagem e comparações para tooling atual [[dac0bd9](https://github.com/macoaure/gubee-php-sdk/commit/dac0bd9dbbd9277a3c67fee8aee2b2894cb70766)]
-- 🔧 ci(ci): configura pipelines e verificações do repositório [[fbfdd5d](https://github.com/macoaure/gubee-php-sdk/commit/fbfdd5de1a0b00785eae0d29b40bb89ef44abe53)]
-- ♻️ refactor(core): reforça base de cliente e hidratação [[0fed024](https://github.com/macoaure/gubee-php-sdk/commit/0fed02400fb037236eff673427484b4815884302)]
-- 🔧 build(core): ajusta tooling e bootstrap do sdk [[e05c67c](https://github.com/macoaure/gubee-php-sdk/commit/e05c67ca6ecca58b00bead378b5d32643a090fa2)]
+- ⬆️ build(deps): amplia constraint de versão do psr/log [[40fdaad](https://github.com/maco-studios/gubee-php-sdk/commit/40fdaad47555e455a7bce1d6dfba3c6e55c0015d)]
+- ♻️ refactor(core): ajusta tipagem e comparações para tooling atual [[dac0bd9](https://github.com/maco-studios/gubee-php-sdk/commit/dac0bd9dbbd9277a3c67fee8aee2b2894cb70766)]
+- 🔧 ci(ci): configura pipelines e verificações do repositório [[fbfdd5d](https://github.com/maco-studios/gubee-php-sdk/commit/fbfdd5de1a0b00785eae0d29b40bb89ef44abe53)]
+- ♻️ refactor(core): reforça base de cliente e hidratação [[0fed024](https://github.com/maco-studios/gubee-php-sdk/commit/0fed02400fb037236eff673427484b4815884302)]
+- 🔧 build(core): ajusta tooling e bootstrap do sdk [[e05c67c](https://github.com/maco-studios/gubee-php-sdk/commit/e05c67ca6ecca58b00bead378b5d32643a090fa2)]
+
+### Removed
+
+- ➖ build(deps): remove dependência symfony/http-client [[47be409](https://github.com/maco-studios/gubee-php-sdk/commit/47be40968707a1f5daffe9e6191f8875f022060b)]
 
 ### Fixed
 
-- 🐛 fix(sync): preserva hidratação de custo do ProductV2 [[d8a0bf3](https://github.com/macoaure/gubee-php-sdk/commit/d8a0bf3b8840c0bf46326fbbd5f60c86dc888c6f)]
-- 🐛 fix(ci): corrige dry-run do Rector [[563af9c](https://github.com/macoaure/gubee-php-sdk/commit/563af9c736c60a07bad28ae45fbefdfeaec22c62)]
-- 🐛 fix(ci): corrige automações de escrita e gates de qualidade [[aab698b](https://github.com/macoaure/gubee-php-sdk/commit/aab698b6fd6b31838e7b185989d678936e2e7ea6)]
-- 🐛 fix(product): ajusta hidratação opcional de variações [[417123a](https://github.com/macoaure/gubee-php-sdk/commit/417123a42ccdaf1ea27ff4d1503ab77fda2679eb)]
+- 🐛 fix(sync): preserva hidratação de custo do ProductV2 [[d8a0bf3](https://github.com/maco-studios/gubee-php-sdk/commit/d8a0bf3b8840c0bf46326fbbd5f60c86dc888c6f)]
+- 🐛 fix(ci): corrige dry-run do Rector [[563af9c](https://github.com/maco-studios/gubee-php-sdk/commit/563af9c736c60a07bad28ae45fbefdfeaec22c62)]
+- 🐛 fix(ci): corrige automações de escrita e gates de qualidade [[aab698b](https://github.com/maco-studios/gubee-php-sdk/commit/aab698b6fd6b31838e7b185989d678936e2e7ea6)]
+- 🐛 fix(product): ajusta hidratação opcional de variações [[417123a](https://github.com/maco-studios/gubee-php-sdk/commit/417123a42ccdaf1ea27ff4d1503ab77fda2679eb)]
 
 ### Miscellaneous
 
-- 📝 docs(contributors): atualiza banner de contributors [[3acd9f4](https://github.com/macoaure/gubee-php-sdk/commit/3acd9f4c5d37490351d30d7b480e20c857edaf2b)]
-- 📝 docs(contributors): atualiza banner de contributors [[52f4e46](https://github.com/macoaure/gubee-php-sdk/commit/52f4e46d02e48e514add1ed0a6ebe420c97f2b62)]
-- 📝 Update CHANGELOG [[064ff66](https://github.com/macoaure/gubee-php-sdk/commit/064ff66e798f4b594b93a7a267b4fc76c2cb09b7)]
--  👷 ci(coverage): atualiza badge automaticamente [[4c761b5](https://github.com/macoaure/gubee-php-sdk/commit/4c761b597c4443e4bf76498895b626e5cbbc505a)]
-- 📝 Update CHANGELOG [[58fbcbe](https://github.com/macoaure/gubee-php-sdk/commit/58fbcbefe741766adaa6606f0833b37e11a331ef)]
-- 📝 docs(readme): adiciona badge local de cobertura [[a20ead4](https://github.com/macoaure/gubee-php-sdk/commit/a20ead445b278f9da1ebe0f2a36ec9c3b7b2d8b9)]
-- 📝 docs(contributors): atualiza banner de contributors [[478fc1e](https://github.com/macoaure/gubee-php-sdk/commit/478fc1ed5f32af7436b29f2c86b19a09911bf0ef)]
-- 📝 Update CHANGELOG [[a861375](https://github.com/macoaure/gubee-php-sdk/commit/a86137501375595b774ab444720b40b4c7345abf)]
-- 📝 docs(contributors): atualiza banner de contributors [[9c9f6de](https://github.com/macoaure/gubee-php-sdk/commit/9c9f6dea8698ff875c381f7c2edbe9710757685a)]
--  👷 ci(automation): automatiza changelog e banner de contributors [[d097997](https://github.com/macoaure/gubee-php-sdk/commit/d09799729a821982acd9d3e8aece1a7a0a7c1049)]
-- 📝 docs(repo): documenta manutenção e colaboração do projeto [[9d03974](https://github.com/macoaure/gubee-php-sdk/commit/9d039748f704a629d43d02c6c5ed7ad3c50e71ea)]
+- 📝 Update CHANGELOG [[c575e7e](https://github.com/maco-studios/gubee-php-sdk/commit/c575e7e97b7f112abe93b2f3ff9ae94bb225161f)]
+- 📝 docs(contributors): atualiza banner de contributors [[3acd9f4](https://github.com/maco-studios/gubee-php-sdk/commit/3acd9f4c5d37490351d30d7b480e20c857edaf2b)]
+- 📝 docs(contributors): atualiza banner de contributors [[52f4e46](https://github.com/maco-studios/gubee-php-sdk/commit/52f4e46d02e48e514add1ed0a6ebe420c97f2b62)]
+- 📝 Update CHANGELOG [[064ff66](https://github.com/maco-studios/gubee-php-sdk/commit/064ff66e798f4b594b93a7a267b4fc76c2cb09b7)]
+-  👷 ci(coverage): atualiza badge automaticamente [[4c761b5](https://github.com/maco-studios/gubee-php-sdk/commit/4c761b597c4443e4bf76498895b626e5cbbc505a)]
+- 📝 Update CHANGELOG [[58fbcbe](https://github.com/maco-studios/gubee-php-sdk/commit/58fbcbefe741766adaa6606f0833b37e11a331ef)]
+- 📝 docs(readme): adiciona badge local de cobertura [[a20ead4](https://github.com/maco-studios/gubee-php-sdk/commit/a20ead445b278f9da1ebe0f2a36ec9c3b7b2d8b9)]
+- 📝 docs(contributors): atualiza banner de contributors [[478fc1e](https://github.com/maco-studios/gubee-php-sdk/commit/478fc1ed5f32af7436b29f2c86b19a09911bf0ef)]
+- 📝 Update CHANGELOG [[a861375](https://github.com/maco-studios/gubee-php-sdk/commit/a86137501375595b774ab444720b40b4c7345abf)]
+- 📝 docs(contributors): atualiza banner de contributors [[9c9f6de](https://github.com/maco-studios/gubee-php-sdk/commit/9c9f6dea8698ff875c381f7c2edbe9710757685a)]
+-  👷 ci(automation): automatiza changelog e banner de contributors [[d097997](https://github.com/maco-studios/gubee-php-sdk/commit/d09799729a821982acd9d3e8aece1a7a0a7c1049)]
+- 📝 docs(repo): documenta manutenção e colaboração do projeto [[9d03974](https://github.com/maco-studios/gubee-php-sdk/commit/9d039748f704a629d43d02c6c5ed7ad3c50e71ea)]
 
 
 <a name="1.0.13"></a>
