@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Gubee\SDK\Resource\Catalog\Product;
 
 use Gubee\SDK\Model\Catalog\Product\Attribute;
+use Gubee\SDK\Model\Common\PagedResult;
 use Gubee\SDK\Resource\AbstractResource;
 
+use function count;
 use function rawurlencode;
-use function sizeof;
 
 class AttributeResource extends AbstractResource
 {
@@ -57,7 +58,6 @@ class AttributeResource extends AbstractResource
      * Bulk create a collection of attributes at once
      *
      * @param array<Attribute> $attributes
-     * @return array<Attribute>
      */
     public function bulkCreate(array $attributes): bool
     {
@@ -74,14 +74,13 @@ class AttributeResource extends AbstractResource
                 );
         }
 
-        return sizeof($response) > 0 ? true : false;
+        return count($response) > 0;
     }
 
     /**
      * Bulk update a collection of attributes at once
      *
      * @param array<Attribute> $attributes
-     * @return array<Attribute>
      */
     public function bulkUpdate(array $attributes): bool
     {
@@ -90,7 +89,7 @@ class AttributeResource extends AbstractResource
             $attributes
         );
 
-        return sizeof($response) > 0 ? true : false;
+        return count($response) > 0;
     }
 
     public function loadById(string $id): Attribute
@@ -131,5 +130,35 @@ class AttributeResource extends AbstractResource
                 Attribute::class,
                 $response
             );
+    }
+
+    public function listAll_2(mixed $pageable): PagedResult
+    {
+        $query = [
+            'pageable' => $pageable,
+        ];
+
+        $response = $this->get("/integration/attributes/list/all", $query);
+
+        return $this->hydratePagedResult(
+            Attribute::class,
+            $response,
+            [],
+            ['attributeApiDTOList']
+        );
+    }
+
+    public function getAttributeByQueryName(string $name): Attribute
+    {
+        $query = [
+            'name' => $name,
+        ];
+
+        $response = $this->get("/integration/attributes/byqueryname", $query);
+
+        return $this->hydrateModel(
+            Attribute::class,
+            $response
+        );
     }
 }

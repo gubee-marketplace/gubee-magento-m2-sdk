@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gubee\SDK\Resource\Catalog;
 
 use Gubee\SDK\Model\Catalog\Category;
+use Gubee\SDK\Model\Common\PagedResult;
 use Gubee\SDK\Resource\AbstractResource;
 
 use function rawurlencode;
@@ -14,18 +15,17 @@ class CategoryResource extends AbstractResource
     // POST
     // ​/integration​/categories
     // Create category
-    public function create(Category $category)
+    public function create(Category $category): Category
     {
         $response = $this->post(
             '/integration/categories',
             $category->jsonSerialize()
         );
 
-        return $this->getClient()->getServiceProvider()
-            ->create(
-                Category::class,
-                $response
-            );
+        return $this->hydrateModel(
+            Category::class,
+            $response
+        );
     }
 
     // GET
@@ -37,11 +37,10 @@ class CategoryResource extends AbstractResource
             '/integration/categories/' . rawurlencode($externalId)
         );
 
-        return $this->getClient()->getServiceProvider()
-            ->create(
-                Category::class,
-                $response
-            );
+        return $this->hydrateModel(
+            Category::class,
+            $response
+        );
     }
 
     // PUT
@@ -54,11 +53,10 @@ class CategoryResource extends AbstractResource
             $category->jsonSerialize()
         );
 
-        return $this->getClient()->getServiceProvider()
-            ->create(
-                Category::class,
-                $response
-            );
+        return $this->hydrateModel(
+            Category::class,
+            $response
+        );
     }
 
     // POST
@@ -66,7 +64,7 @@ class CategoryResource extends AbstractResource
     // Create category
     public function bulkCreate(array $categories): bool
     {
-        $response = $this->post(
+        $this->post(
             '/integration/categories/bulk',
             $categories
         );
@@ -78,7 +76,7 @@ class CategoryResource extends AbstractResource
     // Update category
     public function bulkUpdate(array $categories): bool
     {
-        $response = $this->put(
+        $this->put(
             '/integration/categories/bulk',
             $categories
         );
@@ -95,10 +93,28 @@ class CategoryResource extends AbstractResource
             '/integration/categories/byId/' . rawurlencode($id)
         );
 
-        return $this->getClient()->getServiceProvider()
-            ->create(
-                Category::class,
-                $response
-            );
+        return $this->hydrateModel(
+            Category::class,
+            $response
+        );
+    }
+
+    public function listAll_1(mixed $pageable): PagedResult
+    {
+        $query = [
+            'pageable' => $pageable,
+        ];
+
+        $response = $this->get("/integration/categories/listAll", $query);
+
+        return $this->hydratePagedResult(
+            Category::class,
+            $response,
+            [
+                'serviceProvider'  => $this->getClient()->getServiceProvider(),
+                'categoryResource' => $this,
+            ],
+            ['categoryApiDTOList']
+        );
     }
 }

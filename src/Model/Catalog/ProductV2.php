@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Gubee\SDK\Model\Catalog;
 
-use Gubee\SDK\Model\Catalog\ProductV2\Specification;
-use Gubee\SDK\Model\Catalog\ProductV2\Variation;
 use Gubee\SDK\Api\ServiceProviderInterface;
 use Gubee\SDK\Enum\Catalog\Product\Attribute\OriginEnum;
 use Gubee\SDK\Enum\Catalog\Product\StatusEnum;
 use Gubee\SDK\Enum\Catalog\Product\TypeEnum;
 use Gubee\SDK\Model\AbstractModel;
+use Gubee\SDK\Model\Catalog\ProductV2\Specification;
+use Gubee\SDK\Model\Catalog\ProductV2\Variation;
 
 use function is_array;
 use function is_string;
@@ -270,5 +270,4 @@ class ProductV2 extends AbstractModel
         $this->downloadImages = $downloadImages;
         return $this;
     }
-
 }
