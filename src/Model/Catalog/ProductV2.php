@@ -22,6 +22,7 @@ class ProductV2 extends AbstractModel
     protected string $name;
     protected string $mainCategory;
     protected string $brand;
+    protected ?string $ncm;
     protected TypeEnum $type;
     protected OriginEnum $origin;
     protected StatusEnum $status;
@@ -49,6 +50,7 @@ class ProductV2 extends AbstractModel
         string $name,
         string $mainCategory,
         string $brand,
+        ?string $ncm,
         $type,
         $origin,
         $status,
@@ -63,6 +65,7 @@ class ProductV2 extends AbstractModel
         $this->name         = $name;
         $this->mainCategory = $mainCategory;
         $this->brand        = $brand;
+        $this->ncm = $ncm;
 
         if (is_string($type)) {
             $type = TypeEnum::fromValue($type);
@@ -271,4 +274,14 @@ class ProductV2 extends AbstractModel
         return $this;
     }
 
+    public function getNcm(): ?string
+    {
+        return $this->ncm;
+    }
+
+    public function setNcm(?string $ncm): self
+    {
+        $this->ncm = $ncm;
+        return $this;
+    }
 }

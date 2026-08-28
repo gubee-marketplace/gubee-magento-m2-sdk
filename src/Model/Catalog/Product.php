@@ -28,8 +28,9 @@ class Product extends AbstractModel {
     protected StatusEnum $status;
     protected TypeEnum $type;
     protected ?string $hubeeId = null;
-    protected ?string $name = null;
-    protected ?string $nbm = null;
+    protected ?string $name    = null;
+    protected ?string $nbm     = null;
+    protected ?string $ncm     = null;
     /** @var array<Account>|null */
     protected ?array $accounts = null;
     /** @var array<Category>|null */
@@ -69,6 +70,7 @@ class Product extends AbstractModel {
         ?string $hubeeId = null,
         ?string $name = null,
         ?string $nbm = null,
+        ?string $ncm = null,
         ?array $accounts = null,
         ?array $categories = null,
         ?array $specifications = null,
@@ -120,6 +122,21 @@ class Product extends AbstractModel {
                 }
             }
             $this->setAccounts($accounts);
+        }
+        if ($ncm) {
+            $this->setNcm($ncm);
+        }
+        if ($categories && is_array($categories)) {
+            foreach ($categories as $key => $category) {
+                if (is_string($category)) {
+                    $categories[$key] = [
+                        'serviceProvider' => $serviceProvider,
+                        'id'              => $category,
+                    ];
+                } elseif (is_array($category)) {
+                    $categories[$key] = $category + ['serviceProvider' => $serviceProvider];
+                }
+            }
         }
         if ($categories && is_array($categories)) {
             foreach ($categories as $key => $category) {
@@ -417,4 +434,15 @@ class Product extends AbstractModel {
         );
         return $values;
     }
+
+    public function getNcm(): ?string
+    {
+        return $this->ncm;
+    }
+
+    public function setNcm(?string $ncm): self
+    {
+        $this->ncm = $ncm;
+        return $this;
+    }   
 }
