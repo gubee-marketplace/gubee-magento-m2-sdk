@@ -5,6 +5,7 @@
 
 ### Added
 
+- ✨ ADD NCM attribute [[5b3b021](https://github.com/gubee-marketplace/gubee-magento-m2-sdk/commit/5b3b02123e28c37b44f1653c6addfba44223c513)]
 - ✨ feat(tag): adiciona stack de tags [[6abbedd](https://github.com/gubee-marketplace/gubee-magento-m2-sdk/commit/6abbedd2fa895774b332de02994e192dd0453a80)]
 - ✨ feat(promotion): adiciona stack de promoções [[c22ada3](https://github.com/gubee-marketplace/gubee-magento-m2-sdk/commit/c22ada30b638de342a090c2790a766d568a0404e)]
 - ✨ feat(notification): adiciona stack de notificações [[e3a3244](https://github.com/gubee-marketplace/gubee-magento-m2-sdk/commit/e3a3244605599bc139a91426be3cd032e826b734)]
@@ -40,6 +41,7 @@
 
 ### Miscellaneous
 
+- 📝 Update CHANGELOG [[76633ed](https://github.com/gubee-marketplace/gubee-magento-m2-sdk/commit/76633edeff6b6b278ac70e286b2a491e6f819f2e)]
 -  Merge pull request [#9](https://github.com/gubee-marketplace/gubee-magento-m2-sdk/issues/9) from maco-studios/main [[ab00da3](https://github.com/gubee-marketplace/gubee-magento-m2-sdk/commit/ab00da35105d747caaea4da849d0c8bd616c7bb2)]
 - 📝 Update CHANGELOG [[8b27a09](https://github.com/gubee-marketplace/gubee-magento-m2-sdk/commit/8b27a09ce92fb77e3abd8cf4ce2996701ec20aa0)]
 - 📝 Update CHANGELOG [[c575e7e](https://github.com/gubee-marketplace/gubee-magento-m2-sdk/commit/c575e7e97b7f112abe93b2f3ff9ae94bb225161f)]
